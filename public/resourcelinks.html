@@ -1,130 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Resources Links</title>
+<title>Resource Center - Undergraduate Programs</title>
 <style>
-    body {
+    body, h2, ul, li, p {
         margin: 0;
         padding: 0;
-        font-family: Arial, sans-serif;
     }
 
-    .red-bar {
-        background-color: #8B0015;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .logo {
-        height: 30px;
-    }
-
-    .school-logo {
-        margin-left: 20px;
-        height: 50px;
-    }
-
-    .school-logo2 {
-        margin-left: 40px;
-        margin-left: 0;
-        height: 30px;
-    }
-
-    .text-main {
-        margin-left: 40px;
-        color: darkblue;
-    }
-
-    p {
-      margin: 0;
-      color: black;
-    }
-    
-    .text-bar {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        background-color: #F5F5DC;
-        padding: 10px;
-        list-style: none;
-        color: black;
-        text-align: right;
-        font-size: 14px;
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #eee;
         color: #333;
     }
 
-    h2,
-    ul {
-        margin-left: 40px;
+    .header {
+        background-color: #8B0015;
+        padding: 20px;
+        text-align: center;
+        color: white;
     }
 
-    ul li {
-        margin-bottom: 10px;
+    .header img {
+        max-height: 50px;
     }
 
-    .image-container {
+    .header .main-navigation {
         display: flex;
         justify-content: center;
-        align-items: center;
-        margin-top: 20px; 
+        margin-top: 20px;
     }
 
-    .image-container img {
-        margin-right: 20px; 
+    .header .main-navigation .square {
+        background-color: #333;
+        padding: 10px;
+        margin: 0 10px;
+        border-radius: 5px;
     }
 
-    .beige-bar {
+    .header .main-navigation .square a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .main {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .main h2 {
+        color: darkblue;
+        margin-bottom: 20px;
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 250px;
+        margin: 10px;
+        padding: 20px;
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .card p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .footer {
         background-color: #F5F5DC;
-        height: 200px;
+        padding: 10px;
+        text-align: center;
         position: fixed;
         bottom: 0;
         width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding-left: 20px;
     }
-
 </style>
 </head>
 <body>
 
-<div class="red-bar">
+<div class="header">
     <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
+    <div class="main-navigation">
+        <div class="square"> <a href="fouryearplan.html">Create a four-year plan</a></div>
+        <div class="square"> <a href="interestsurvey.html">Interest Survey</a></div>
+        <div class="square"> <a href="courserecomendation.html">Course Recommendation</a></div>
+    </div>
+    <p>Resource Center</p>
 </div>
 
-<img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
-<p class="text-main">Resources Link</p>
-<p class="text-main">Search courses | Course recommendation | Create a four-year plan</p>
-
-<h2>Undergraduate Programs</h2>
-<ul>
-    <li><a href="https://ischool.arizona.edu/undergraduate-programs/undergraduate">Undergraduate Degrees</a></li>
-    <li><a href="https://ischool.arizona.edu/undergraduate-programs/minors-certificates">Undergraduate Minors</a></li>
-    <li><a href="#">Undergraduate Certificates</a></li>
-    <li><a href="https://ischool.arizona.edu/undergraduate-programs/courses">Undergraduate Course Descriptions</a></li>
-</ul>
-
-<div class="image-container">
-    <img src="image1.jpg" alt="Image 1">
-    <img src="image2.jpg" alt="Image 2">
-    <img src="image3.jpg" alt="Image 3">
+<div class="main">
+    <h2>Undergraduate Programs</h2>
+    <div class="card-container">
+        <div class="card">
+            <a href="https://ischool.arizona.edu/undergraduate-programs/undergraduate">Undergraduate Degrees</a>
+            <p>Embark on your academic journey with a diverse range of undergraduate degrees designed to ignite your passion and shape your future.</p>
+        </div>
+        <div class="card">
+            <a href="https://ischool.arizona.edu/undergraduate-programs/minors-certificates">Undergraduate Minors</a>
+            <p>Complement your major with a minor to explore new academic horizons and expand your expertise.</p>
+        </div>
+        <div class="card">
+            <a href="#">Undergraduate Certificates</a>
+            <p>Gain specialized skills with certificates that add value to your degree and enhance your career readiness.</p>
+        </div>
+        <div class="card">
+            <a href="https://ischool.arizona.edu/undergraduate-programs/courses">Undergraduate Course Descriptions</a>
+            <p>Dive into the details of course offerings to tailor your educational journey to your unique aspirations.</p>
+        </div>
+    </div>
 </div>
 
-<h2>ISchool Resources</h2>
-<ul>
-    <li><a href="https://ischool.arizona.edu/about/meet-the-dean">ISchool Dean</a></li>
-    <li><a href="https://ischool.arizona.edu/calendar">ISchool Events</a></li>
-    <li><a href="https://ischool.arizona.edu/students-and-career/advising">ISchool Advisors</a></li>
-    <li><a href="https://ischool.arizona.edu/students-and-career/student-clubs-involvement">ISchool Clubs</a></li>
-</ul>
+<div class="footer">
+    <p>University of Arizona | Information School</p>
+</div>
+<div class="main">
+    <h2>ISchool Resources</h2>
+    <div class="card-container">
+        <div class="card">
+            <a href="https://ischool.arizona.edu/about/meet-the-dean">ISchool Dean</a>
+            <p>Meet the visionary leader at the helm of ISchool, driving innovation, excellence, and the transformative power of education.</p>
+        </div>
+        <div class="card">
+            <a href="https://ischool.arizona.edu/calendar">ISchool Events</a>
+            <p>Dive into a vibrant calendar of events designed to enrich your ISchool experience.</p>
+        </div>
+        <div class="card">
+            <a href="https://ischool.arizona.edu/students-and-career/advising">ISchool Advisors</a>
+            <p>Navigate your academic journey with ease. Our dedicated ISchool advisors are here to support you.</p>
+        </div>
+        <div class="card">
+            <a href="https://ischool.arizona.edu/students-and-career/student-clubs-involvement">ISchool Clubs</a>
+            <p>Join the dynamic ISchool club community to connect with peers and engage in enriching extracurricular activities.</p>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <h2>Health Resources</h2>
+    <div class="card-container">
+        <div class="card">
+            <a href="https://www.health.arizona.edu">Campus Health</a>
+            <p>Your health and well-being are our top priorities. Discover a wide range of health services available on campus.</p>
+        </div>
+        <div class="card">
+            <a href="https://drc.arizona.edu">Disability Resource Center (DRC)</a>
+            <p>Championing accessibility and inclusion, the DRC provides comprehensive services to ensure equitable experiences for all university community members.</p>
+        </div>
+        <div class="card">
+            <a href="https://caps.arizona.edu">CAPS</a>
+            <p>Find solace and support at CAPS. Our counseling services are designed to help you navigate life's challenges.</p>
+        </div>
+    </div>
+</div>
 
+<div class="beige-bar">
+    <img src="SchoolOfInformation2.png" alt="School of Information Logo" class="school-logo2">
+    <div class="text-bar">
+      <p>School of Information</p>
+	    <p>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
+	    <p>P.O. Box 210076</p>
+	    <p>Tucson, Arizona 85721</p>
+	    <p>Contact Us | <a href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | 520-621-3565</p>
+	    <p>A member of the iSchools consortium.</p>
+	    <p>Emergency Information</p>
+	    <p>UAlert</p>
+	    <p>Information Security & Privacy</p>
+	    <p>Campus Accessibility</p>
+    </div>
+  </div>
 
-<h2>Navigating D2L and UAccess</h2>
-<ul>
-    <li><a href="https://help.intech.arizona.edu/article/654-access-d2l-brightspace">How to use D2L</a></li>
-    <li><a href="https://wpu.cfa.arizona.edu/wp-content/uploads/sites/3/2020/09/18135032/How-to-View-Your-Advisement-Report-PDF.pdf">How to use Advisment Report</a></li>
-    <li><a href="https://uaccess.arizona.edu">How to use UAccess</a></li
+</body>
+</html>
