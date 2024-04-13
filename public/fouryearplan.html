@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
 <meta charset="UTF-8">
 <title> Create a four-year plan </title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    position: relative;
+  font-family: Arial, sans-serif;
 }
 
 .red-bar {
@@ -46,31 +42,6 @@ body {
 p {
     margin: 0;
     color: black;
-}
-
-.text-bar {
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    background-color: #F5F5DC;
-    padding: 10px;
-    color: black;
-    text-align: right;
-    font-size: 14px;
-    color: #333;
-    margin-left: auto;
-}
-
-.beige-bar {
-    background-color: #F5F5DC;
-    height: 250px;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 20px;
-    z-index: 999; 
 }
 
 .labeling {
@@ -120,17 +91,15 @@ p {
     color: rgb(77, 15, 15);
 }
 
-.scrollable-rectangle {
-    width: 100%; 
-    max-width: auto; /* Adjust max-width if needed */
-    background-color: #f0f0f0;
-    height: 80%; 
-    margin: 100px auto; 
-    overflow: auto;
-    border: 1px solid #ccc;
-    
-}
 
+#logo2 {
+  
+  position: absolute;
+  width: 198px;
+  height: 35.904px;
+  top: 60px;
+  left: 30px;
+}
 
 
 
@@ -139,10 +108,35 @@ p {
 }
 
 .left-term {
+  margin-bottom: 20px;
   max-width: 400px;
   }
 
+  
+  
+  #bottom_text {
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: normal; 
+  overflow-wrap: break-word; 
+  }
+  #bottom {
+  background-color: beige;
+  position: relative;
+  margin: 0;
+  padding-left: 20px; 
+  padding-right: 20px; 
+  padding-top: 10px;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  width: auto;
+  box-sizing: border-box; 
+}
+
+
   .right-term {
+  margin-bottom: 20px;
   max-width: 400px;
   }
 .col-md-12{
@@ -151,7 +145,8 @@ p {
   margin-right: 500px;
 }
 table {
-            width: 100%;
+  margin-left: 10px;
+            width: 86%;
             border-collapse: collapse;
         }
         th, td {
@@ -162,6 +157,9 @@ table {
         th {
             background-color: #97d2ea;
         }
+
+
+
 
 </style>
 </head>
@@ -177,10 +175,11 @@ table {
 
 <p class="text-main"> Create a four-year plan </p>
 <p class="text-main"> 
-  <a href="interestsurvey.html">Interest survey</a> | 
-  <a href="courserecomendation.html">Course recommendation</a> | 
-  <a href="resourcelinks.html">Resources Link</a>
+  <a style="color: #1c144a;" href="interestsurvey.html">Interest survey</a> | 
+  <a style="color: #1c144a;" href="courserecomendation.html">Course recommendation</a> | 
+  <a style="color: #1c144a;" href="resourcelinks.html">Resources Link</a>
 </p>
+
 
 
 <div class="container">
@@ -455,8 +454,8 @@ table {
               
               
               <tr>
-                <td class= "zg"> ELECTIVES (if needed to reach 120 units/42 UD)</td>
-                <td class= "zg">Other Requirements</td>
+                <td> ELECTIVES (if needed to reach 120 units/42 UD)</td>
+                <td>Other Requirements</td>
               </tr>
               <tr>
                 <td><ul>
@@ -507,25 +506,28 @@ table {
             </table>
         </div>
       </div>
-      <!-- <div class="row">
-        <div id="bottom">
-            <img id="logo2" src="SchoolOfInformation.png" alt="School of Information">
-
-            <p>School of Information</p>
-            <p>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
-            <p>P.O. Box 210076</p>
-            <p>Tucson, Arizona 85721</p>
-            <p>Contact Us | <a href=“mailto:si_info@arizona.edu”>si_info@arizona.edu</a> | 520-621-3565</p>
-            <p>A member of the iSchools consortium.</p>
-            <p>Emergency Information</p>
-            <p>UAlert</p>
-            <p>Information Security & Privacy</p>
-            <p>Campus Accessibility</p>
-        </div>
-      </div> -->
-
-</div>
+      
+   
  
+</div>
+</div>
+
+
+<div id="bottom">
+  <img id="logo2" src="SchoolOfInformation.png" alt="School of Information">
+  <div id="bottom_text">
+    <p>School of Information</p>
+    <p>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
+    <p>P.O. Box 210076</p>
+    <p>Tucson, Arizona 85721</p>
+    <p>Contact Us | <a href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | 520-621-3565</p>
+    <p>A member of the iSchools consortium.</p>
+    <p>Emergency Information</p>
+    <p>UAlert</p>
+    <p>Information Security & Privacy</p>
+    <p>Campus Accessibility</p>
+  </div>
+</div>
 
 <script>
   function addCustomItem(resultBoxId) {
@@ -587,8 +589,6 @@ table {
 </script>
 
 
-
->>>>>>> 3db356293dd2c3afc843c695df6e3827aac058d5
 
 </body>
 </html>
