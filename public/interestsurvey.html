@@ -13,6 +13,14 @@
             font-family: Arial, sans-serif;
         
         }
+        .square_page{
+            background-color: #001C48;
+            padding: 4px;
+            border-radius: 5px;
+            font-size: 11px;
+
+        }
+
         
         #top {
             top: 0px;
@@ -37,11 +45,9 @@
         
         #logoTop {
             position: absolute;
-            top: 70px;
-            left: 3px;
-            margin-left: 85px;
-            width: 245px;
-            height: 44px;
+            top: 50px;
+            margin-left: 20px;
+            height: 50px;
         
         }
         
@@ -60,6 +66,7 @@
             position: relative;
             top: 155px;
             width: 70%;
+            margin-top: -150px;
         
         }
         
@@ -133,6 +140,56 @@
             margin: 0;
             margin-left: 90px;
             }
+        .title_top{
+            position: absolute;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+            color: #0C234B;
+            top: 100px;
+            margin-left: 70px;
+            width: 250px;
+            height: 44px;
+
+        }
+        .text_main_top{
+            margin-left: 40px;
+            color: rgb(4, 4, 85);
+        }
+        .pages_title{
+            margin-top: 150px;
+            margin-left: 50px;
+        }
+          
+  
+  #bottom_text {
+  text-align: right;
+  line-height: 2.5px; 
+  margin-top: 0px;
+  }
+
+
+  #bottom {
+  background-color: beige;
+  position: relative;
+  margin: 0;
+  padding-left: 20px; 
+  padding-right: 20px; 
+  padding-top: 10px;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  width: auto;
+  bottom: 0;
+  box-sizing: border-box; 
+}
+
+#logo2 {
+  
+  position: absolute;
+  width: 198px;
+  height: 35.904px;
+  top: 60px;
+  left: 30px;
+}
+
 
         </style>
 
@@ -147,17 +204,15 @@
 
     <img id="logoTop" src="SchoolOfInformation.png" alt="School of Information">
 
-    <h3 id="title">
-        Interest Survey
-    </h3>
+    <h3 class="title_top">Interest Survey</h3>
 
-
-     <p class="text-main"> 
-      <a href="courserecomendation.html"> Course Recomendation</a> | 
-      <a href="mainweb.html"> Main page</a> | 
-      <a href="resourcelinks.html">Resources Link</a>
-    </p>
-
+    <p></p> 
+    <p class="pages_title"> 
+        <a class="square_page" style="margin-left: 20px;  color: #dfdee7;" href="interestsurvey.html">Interest survey</a> | 
+        <a class="square_page" style="color: #dfdee7;" href="courserecomendation.html">Course recommendation</a> | 
+        <a class="square_page" style="color: #dfdee7;" href="resourcelinks.html">Resources Link</a>   |
+        <a class="square_page" style="color: #eeeeee;" href="mainweb.html"> Main Page </a>
+      </p>
     <!--  All button are check box  -->
     <div id="forms">
         <form id="emphasisquestion">
@@ -175,7 +230,7 @@
             <br>
             <br>
             <button type="button" id="submitButton1" value="Submit">Submit</button>
-            <a href="courserecomendation.html">Courses</a>
+            <!-- <a href="courserecomendation.html">Courses</a> -->
 
         </form>
         <br>
@@ -560,20 +615,23 @@
 
     </div>
 
-    <div id="bottom">
-        <img id="logoBottom" src="SchoolOfInformation.png" alt="School of Information">
 
-        <p class="footerText">School of Information</p>
-        <p class="footerText">1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
-        <p class="footerText">P.O. Box 210076</p>
-        <p class="footerText">Tucson, Arizona 85721</p>
-        <p class="footerText">Contact Us | <a href=“mailto:si_info@arizona.edu”>si_info@arizona.edu</a> | 520-621-3565</p>
-        <p class="footerText">A member of the iSchools consortium.</p>
-        <p class="footerText">Emergency Information</p>
-        <p class="footerText">UAlert</p>
-        <p class="footerText">Information Security & Privacy</p>
-        <p class="footerText">Campus Accessibility</p>
-    </div>
+    <div id="bottom">
+        <img id="logo2" src="SchoolOfInformation.png" alt="School of Information">
+        <div id="bottom_text">
+          <p>School of Information</p>
+          <p>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
+          <p>P.O. Box 210076</p>
+          <p>Tucson, Arizona 85721</p>
+          <p>Contact Us | <a href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | 520-621-3565</p>
+          <p>A member of the iSchools consortium.</p>
+          <p>Emergency Information</p>
+          <p>UAlert</p>
+          <p>Information Security & Privacy</p>
+          <p>Campus Accessibility</p>
+        </div>
+      </div>
+      
 <script src="interestclient.js"></script>
 
 </body>

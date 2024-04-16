@@ -9,6 +9,8 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      
+      
   }
 
   .container {
@@ -85,26 +87,30 @@
   .course-list li:last-child {
       border-bottom: none;
   }
+  .school-logo {
+    margin-left: 20px;
+    height: 50px;
+}
 
-  
-  #bottom_text {
-  text-align: right;
-  padding-left: 10px;
-  padding-right: 10px;
-  line-height: 2.5px; 
-  
-  }
-  #bottom {
-  background-color: beige;
+
+
+
+#bottom {
   position: relative;
-  margin: 0;
-  padding-left: 20px; 
-  padding-right: 20px; 
-  padding-top: 10px;
-  margin-top: 40px;
-  padding-bottom: 10px;
-  width: auto;
-  box-sizing: border-box; 
+
+  background-color: beige;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#bottom_text {
+  text-align: right;
+  margin-top: 30px;
+  line-height: 1.5;
 }
 
 
@@ -116,11 +122,11 @@
   left: 30px;
 }
 
-  .square_page{
+.square_page{
   background-color: #001C48;
   padding: 4px;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 11px;
 
 }
 a {
@@ -136,16 +142,18 @@ a {
 <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona" style="width: 300px; height: 35px; position: relative; left: 50px; top: 8px;">
 </div>
 
+<img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
 
 
-<h3 id="title" style="position: absolute; color: #0C234B; top: 110px; margin-left: 94px; width: 250px; height: 44px;">
+<h3 id="title" style="position: absolute; color: #0C234B; top: 110px; margin-left: 50px; width: 250px; height: 44px;">
 Course Recommendation
 </h3>
 
 <p class="text-main" style="position: absolute; color: rgb(4, 4, 85); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; top: 150px; margin-left: 85px;">
-<a class="square_page" style="  margin-left: 10px;  color: #dfdee7;" href="interestsurvey.html">Interest survey</a> |
+<a class="square_page" style="  margin-left: -35px;  color: #dfdee7;" href="interestsurvey.html">Interest survey</a> |
 <a class="square_page" style="  color: #dfdee7;" href="mainweb.html">Main page</a> |
-<a class="square_page" style="    color: #dfdee7;" href="resourcelinks.html">Resources Link</a>
+<a class="square_page" style="    color: #dfdee7;" href="resourcelinks.html">Resources Link</a> |
+<a class="square_page" style="color: #dfdee7;" href="fouryearplan.html"> Four-year plan </a>
 </p>
 
 <div class="container">
@@ -284,6 +292,8 @@ Course Recommendation
 <p>Campus Accessibility</p>
 </div>
 </div>
+
+
 
   <script src="courserecclient.js"></script>
 </body>
