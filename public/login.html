@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8" />
     <title>UAC LOGIN</title>
-    <script src="login.js"></script>
+    
     <style>
 
         body {
@@ -60,11 +60,17 @@
         #login {
             position: relative;
             top: 155px;
-            left: 375px;
-            width: 40%;
+            left: 320px;
+            width: 50%;
             margin-bottom: 20px;
             text-align: center;
             font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+            margin-bottom: 115px;
+        }
+
+        #disclaimericon {
+            width: 80px;
+            height: 80px;
         }
 
         .acc-style {
@@ -107,8 +113,6 @@
             transition: all 0.5s ease-out;
         }
 
-
-
         #submitButton {
             position: relative;
             top: 25px;
@@ -139,15 +143,9 @@
 
         }
 
-        #passwordlogin {
-            position: relative;
-            left: 65px;
-        }
-
         #forgotpassword {
             position: relative;
             color: #a70d26;
-            left: 65px;
             width: 127px;
             height: 19px;
             transition: color 0.05s linear;
@@ -181,51 +179,88 @@
 
     <img id="logoTop" src="SchoolOfInformation.png" alt="School of Information">
 
+    <h2 style="position: relative; top: 110px; left: 90px; width: 400px;">Welcome to UA Course Compass</h2>
+
     <div id="login">
 
         <h1>Login</h1>
 
-        <label class="acc-style" for="emaillogin">Email</label>
+        <form>
+
+            <label class="acc-style" for="emaillogin">Email</label>
+            <br>
+
+            <input type="email" id="emaillogin" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an email" required=''>
+            <br>
+            <br>
+
+            <label class="acc-style" for="passwordlogin">Password</label>
+            <br>
+
+            <input type="password" id="passwordlogin" required=''>
+
+            <br>
+            <br>
+            
+            <!-- Replace onclick with function to swap pages to forgotpassword.html -->
+            <a id="forgotpassword" onclick="switchToForgotPassword()"  >Forgot Password?</a>
+
+            <br>
+            <br>
+
+            <!-- make login.js file to use onlclick=login() -->
+            <button class="index-btn-style animated-btn" type="button" onclick="login()">Login</button>
+
+            <div id="throw-error"></div>
+
+            <h1>Create Account</h1>
+
+            <label class="acc-style" for="emailcreate">Email</label>
+            <br>
+
+            <input type="email" id="emailcreate" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an email" required=''>
+            <br>
+            <br>
+
+            <label class="acc-style" for="passwordcreate">Password</label>
+            <br>
+
+            <input type="password" id="passwordcreate" required=''>
+            <br>
+            <br>
+            <br>
+
+            <label class="acc-style" for="major">Select Your Major</label>
+            <br>
+            <br>
+
+            <input type="radio" id="emphDs" name="major" required='' value="DS">
+            <label for="emphDs">BS Information Science: Data Science</label><br>
+
+            <input type="radio" id="emphIntTech" name="major" required='' value="IIT">
+            <label for="emphIntTech">BS Information Science: Interactive and Immersicve Technologies</label><br>
+            
+            <br>
+            <br>
+
+            <!-- make login.js file to use onlclick=createAccount() -->
+            <input class="index-btn-style animated-btn" type="submit" onclick="createAccount()" value="Create">
+
+        </form>
+
+        <br>
+        <br>
         <br>
 
-        <input type="text" id="emaillogin" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an email" required=''>
-        <br>
-        <br>
+        <img id="disclaimericon" src="disclaimer.jpg" alt="ATTENTION">
 
-        <label class="acc-style" for="passwordlogin">Password</label>
-        <br>
+        <h1  style="color: red;">ATTENTION</h1>
 
-        <input type="password" id="passwordlogin" required=''>
-        
-        <!-- Replace onclick with function to swap pages to forgotpassword.html -->
-        <a id="forgotpassword" onclick="" >Forgot Password?</a>
-
-        <br>
-        <br>
-
-        <!-- make login.js file to use onlclick=login() -->
-        <button class="index-btn-style animated-btn" type="button" onclick="login()">Login</button>
-
-        <div id="throw-error"></div>
-
-        <h1>Create Account</h1>
-
-        <label class="acc-style" for="emailcreate">Email</label>
-        <br>
-
-        <input type="text" id="emailcreate" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an email" required=''>
-        <br>
-        <br>
-
-        <label class="acc-style" for="passwordcreate">Password</label>
-        <br>
-
-        <input type="password" id="passwordcreate" required=''>
-        <br>
-        <br>
-
-        <!-- make login.js file to use onlclick=createAccount() -->
-        <button class="index-btn-style animated-btn" type="button" onclick="createAccount()">Create</button>
+        <h2>
+            This service does not replace your advisement report and is only for students 
+            who are pursuing a Bachelors of Science in Information Science with either a Data Science or 
+            Interactive & Immersive Technologies Emphasis
+        </h2>
 
     </div>
 
@@ -245,6 +280,8 @@
         <p class="footerText">Information Security & Privacy</p>
         <p class="footerText">Campus Accessibility</p>
     </div>
+
+    <script src="login.js"></script>
 
 </body>
 
