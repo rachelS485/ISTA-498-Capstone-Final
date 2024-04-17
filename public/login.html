@@ -167,6 +167,10 @@
             padding-left: 10px;
             
         }
+        .options {
+            margin-bottom: 15px;
+        
+        }
 
     </style>
 
@@ -204,7 +208,7 @@
         <br>
 
         <!-- make login.js file to use onlclick=login() -->
-        <button class="index-btn-style animated-btn" type="button" onclick="login()">Login</button>
+        <button class="index-btn-style animated-btn" type="button" id="loginButton">Login</button>
 
         <div id="throw-error"></div>
 
@@ -223,9 +227,20 @@
         <input type="password" id="passwordcreate" required=''>
         <br>
         <br>
+        <br>
+        <br>
+        <label class="acc-style" for="emailcreate">Major</label>
+        <input type="radio" id="major1" class="options" value="BS in IS data science emphasis">
+        <label for="I10E" class="options">Bachelors of Science in Information Science with an emphasis in Data Science</label><br>
+        
+        <input type="radio" id="major2" class="options" value="BS in IS data science emphasis">
+        <label for="I10E" class="options">Bachlors of Science in Information Science with emphasis in Interactive and Immersive Technologies</label><br>
+
+        <br>
+        <br>
 
         <!-- make login.js file to use onlclick=createAccount() -->
-        <button class="index-btn-style animated-btn" type="button" onclick="createAccount()">Create</button>
+        <button class="index-btn-style animated-btn" type="button" id="createAccountButton">Create</button>
 
     </div>
 
@@ -245,7 +260,7 @@
         <p class="footerText">Information Security & Privacy</p>
         <p class="footerText">Campus Accessibility</p>
     </div>
-
+    <script src="login.js"></script>
 </body>
 
 </html>
