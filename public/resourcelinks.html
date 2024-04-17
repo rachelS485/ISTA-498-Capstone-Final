@@ -9,41 +9,22 @@
         padding: 0;
     }
 
+
+#logo2 {
+  
+  position: absolute;
+  width: 198px;
+  height: 35.904px;
+  top: 60px;
+  left: 30px;
+}
     body {
         font-family: 'Arial', sans-serif;
         background-color: #eee;
         color: #333;
     }
 
-    .header {
-        background-color: #8B0015;
-        padding: 20px;
-        text-align: center;
-        color: white;
-    }
 
-    .header img {
-        max-height: 50px;
-    }
-
-    .header .main-navigation {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .header .main-navigation .square {
-        background-color: #333;
-        padding: 10px;
-        margin: 0 10px;
-        border-radius: 5px;
-    }
-
-    .header .main-navigation .square a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
 
     .main {
         padding: 40px;
@@ -86,18 +67,80 @@
         line-height: 1.6;
     }
 
-    .footer {
-        background-color: #F5F5DC;
-        padding: 10px;
-        text-align: center;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
+
+
+
+
+.red-bar {
+    background-color: #8B0015;
+    height: 50px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#bottom_text {
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: normal; 
+  overflow-wrap: break-word; 
+  }
+  #bottom {
+  background-color: beige;
+  position: relative;
+  margin: 0;
+  padding-left: 20px; 
+  padding-right: 20px; 
+  padding-top: 10px;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  width: auto;
+  box-sizing: border-box; 
+}
+
+
+.logo {
+    height: 30px;
+    
+}
+
+.school-logo {
+    margin-left: 20px;
+    height: 50px;
+}
+
+.school-logo2 {
+    margin-left: 40px;
+    height: 40px;
+}
+
+.text-main {
+    margin-left: 40px;
+    color: rgb(4, 4, 85);
+}
+
+.square_page{
+  background-color: #001C48;
+  padding: 4px;
+  border-radius: 5px;
+  font-size: 11px;
+  text-decoration: none;
+
+}
+
+
 </style>
 </head>
 <body>
+<div class="red-bar">
+    <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
+</div>
 
+<img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
+
+<!--        
 <div class="header">
     <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
     <div class="main-navigation">
@@ -105,11 +148,20 @@
         <div class="square"> <a href="interestsurvey.html">Interest Survey</a></div>
         <div class="square"> <a href="courserecomendation.html">Course Recommendation</a></div>
     </div>
-    <p>Resource Center</p>
-</div>
+</div> -->
+
+
+<h3 class="text-main"> Resource Links Page </h3>
+<p> 
+  <a  class="square_page" style="  margin-left: 40px;  color: #dfdee7;" href="interestsurvey.html">Interest Survey</a> | 
+  <a class="square_page" style="color: #dfdee7;" href="courserecomendation.html">Course Recommendation</a> | 
+  <a class="square_page" style="color: #dfdee7;" href="fouryearplan.html">Four Year Plan</a>   |
+  <a class="square_page" style="color: #dfdee7;" href="mainweb.html"> Main Page </a>
+</p>
+
 
 <div class="main">
-    <h2>Undergraduate Programs</h2>
+    <h2>Resource Center Undergraduate Programs</h2>
     <div class="card-container">
         <div class="card">
             <a href="https://ischool.arizona.edu/undergraduate-programs/undergraduate">Undergraduate Degrees</a>
@@ -128,10 +180,6 @@
             <p>Dive into the details of course offerings to tailor your educational journey to your unique aspirations.</p>
         </div>
     </div>
-</div>
-
-<div class="footer">
-    <p>University of Arizona | Information School</p>
 </div>
 <div class="main">
     <h2>ISchool Resources</h2>
@@ -171,22 +219,21 @@
         </div>
     </div>
 </div>
-
-<div class="beige-bar">
-    <img src="SchoolOfInformation2.png" alt="School of Information Logo" class="school-logo2">
-    <div class="text-bar">
-      <p>School of Information</p>
-	    <p>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
-	    <p>P.O. Box 210076</p>
-	    <p>Tucson, Arizona 85721</p>
-	    <p>Contact Us | <a href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | 520-621-3565</p>
-	    <p>A member of the iSchools consortium.</p>
-	    <p>Emergency Information</p>
-	    <p>UAlert</p>
-	    <p>Information Security & Privacy</p>
-	    <p>Campus Accessibility</p>
-    </div>
-  </div>
-
+        </div>
+        <div id="bottom">
+            <img id="logo2" src="SchoolOfInformation.png" alt="School of Information">
+            <div id="bottom_text">
+              <p>School of Information</p>
+              <p>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
+              <p>P.O. Box 210076</p>
+              <p>Tucson, Arizona 85721</p>
+              <p>Contact Us | <a href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | 520-621-3565</p>
+              <p>A member of the iSchools consortium.</p>
+              <p>Emergency Information</p>
+              <p>UAlert</p>
+              <p>Information Security & Privacy</p>
+              <p>Campus Accessibility</p>
+            </div>
+          </div>
 </body>
 </html>
