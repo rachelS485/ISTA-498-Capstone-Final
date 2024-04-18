@@ -380,6 +380,102 @@ app.post("/loadinterests", (req, res)=>{
     });
 });
 
+app.post("/savefouryearplan", (req, res)=>{
+    console.log("Server received");
+    res.setHeader('Content-Type', 'text/html');
+    let savedPlan = req.body.fouryearplan;
+
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(checkQuery, function(error, result){
+                if(error){
+                    throw error;
+                };
+                let resultUser = result.rows;
+                console.log(resultUser);
+                if(resultUser.length > 0){
+                    let updateInterestsQuery = "UPDATE fouryearplan SET planstring = $1 WHERE userid = $2";
+                    client.query(updateInterestsQuery, [savedPlan, req.session.user[0]['userid']], (error, results)=>{
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"savedplan": "Update sucess!"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Update successful!");
+                        };  
+                    });
+                }else{
+                    let createInterstQuery = "INSERT INTO fouryearplan (userid, planstring) VALUES ($1, $2)";
+                    client.query(createInterstQuery, [req.session.user[0]['userid'], savedPlan], (error, results)=>{
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"savedplan": "Added new interests!"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Plan added successfully!");
+                        };
+                        
+                    });
+                };
+
+            });
+        }
+    });
+
+});
+
+app.post("/updatfouryearplanui", (req, res)=>{
+    console.log("Server received");
+    res.setHeader('Content-Type', 'text/html');
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(checkQuery, function(error, result){
+                if(error){
+                    throw error;
+                };
+                let resultUser = result.rows;
+                console.log(resultUser);
+                if(resultUser.length > 0){
+                    let interestsQuery = "SELECT planstring FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+                    client.query(interestsQuery, function(error, result){
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = result.rows;
+                        console.log(resultUser);
+                        var dataSend = {"plansaved": resultUser[0]['planstring']};
+                        console.log(JSON.stringify(dataSend));
+                        res.send(JSON.stringify(dataSend));
+                        console.log("Four year plan sent!");
+                    });
+                }else{
+                    var dataSend = {"plansaved": 'No plan'};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("No four plan yet!");
+                };
+
+            });
+        }
+    });
+});
+
 //Server setup
 app.listen(3000, () => {
     console.log("Server running on port 3000");
