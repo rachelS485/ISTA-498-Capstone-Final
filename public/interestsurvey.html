@@ -23,16 +23,26 @@
 
         
         #top {
-            top: 0px;
             position: absolute;
+            top: 0;
             background-color: #a70d26;
             color: white;
             width: 100%;
             height: 50px;
-            margin: 0;
-            padding: 0;
-            
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
         }
+        #settings-link, #help-link 
+        {
+            color: white;
+            margin-right: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
         
         #nameLogo {
             position: relative;
@@ -191,15 +201,18 @@
 }
 
 
-        </style>
+    </style>
 
 </head>
 
 <body id="body">
 
-    <div id="top" >
+    <div id="top">
         <img id="nameLogo" src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona">
-
+        <div>
+            <a href="settings.html" id="settings-link" class="fas fa-cog" title="Settings"></a>
+            <a href="help.html" id="help-link" class="fas fa-question-circle" title="Need help?"></a>
+        </div>
     </div>
 
     <img id="logoTop" src="SchoolOfInformation.png" alt="School of Information">

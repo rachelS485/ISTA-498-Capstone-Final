@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UA compass</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-
-  
     body {
       margin: 0;
       padding: 0;
@@ -19,6 +18,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+    }
+
+    .settings-icon, .help-link {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px;
+    }
+
+    .settings-icon {
+      right: 20px;
+    }
+
+    .help-link {
+      right: 100px;
     }
 
     .beige-bar {
@@ -54,7 +73,6 @@
       align-items: center;
       height: 300px;
       border-radius: 5px;
-
     }
 
     .square {
@@ -90,9 +108,10 @@
   </style>
 </head>
 <body>
-
   <div class="red-bar">
     <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
+    <a href="settings.html" class="fas fa-cog settings-icon"></a>
+    <a href="help.html" class="help-link">Need help?</a>
   </div>
 
   <img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
