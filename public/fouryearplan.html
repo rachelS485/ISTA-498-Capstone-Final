@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title> Create a four-year plan </title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -13,22 +14,41 @@ body {
     background-color: #8B0015;
     height: 50px;
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
+
+.settings-icon, .help-link {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.settings-icon {
+    right: 20px;
+}
+
+.help-link {
+    right: 100px;
+}
+
 .square_page{
   background-color: #001C48;
   padding: 4px;
   border-radius: 5px;
   font-size: 11px;
-
+  color: #dfdee7;
 }
 
 
 .logo {
     height: 30px;
-    
 }
 
 .school-logo {
@@ -60,10 +80,9 @@ p {
     padding: 0 18px;
     display: none;
     overflow: hidden;
-    width: 100%; /* Adjust width if needed */
+    width: 100%;
     background-color: #f1f1f1;
 }
-
 
 .class-box {
     background-color: #f0f0f0;
@@ -100,12 +119,11 @@ p {
 
 
 #logo2 {
-  
-  position: absolute;
-  width: 198px;
-  height: 35.904px;
-  top: 60px;
-  left: 30px;
+    position: absolute;
+    width: 198px;
+    height: 35.904px;
+    top: 60px;
+    left: 30px;
 }
 
 
@@ -115,64 +133,60 @@ p {
 }
 
 .left-term {
-  margin-bottom: 20px;
-  max-width: 400px;
-  }
-
-  
-  
-  #bottom_text {
-  text-align: right;
-  padding-left: 10px;
-  padding-right: 10px;
-  line-height: normal; 
-  overflow-wrap: break-word; 
-  }
-  #bottom {
-  background-color: beige;
-  position: relative;
-  margin: 0;
-  padding-left: 20px; 
-  padding-right: 20px; 
-  padding-top: 10px;
-  margin-top: 40px;
-  padding-bottom: 10px;
-  width: auto;
-  box-sizing: border-box; 
+    margin-bottom: 20px;
+    max-width: 400px;
 }
 
+#bottom_text {
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: normal; 
+    overflow-wrap: break-word; 
+}
+#bottom {
+    background-color: beige;
+    position: relative;
+    margin: 0;
+    padding-left: 20px; 
+    padding-right: 20px; 
+    padding-top: 10px;
+    margin-top: 40px;
+    padding-bottom: 10px;
+    width: auto;
+    box-sizing: border-box; 
+}
 
-  .right-term {
-  margin-bottom: 20px;
-  max-width: 400px;
-  }
+.right-term {
+    margin-bottom: 20px;
+    max-width: 400px;
+}
 .col-md-12{
-  height: 100%;
-  align-items: center;
-  margin-right: 500px;
+    height: 100%;
+    align-items: center;
+    margin-right: 500px;
 }
 table {
-  margin-left: 10px;
-            width: 86%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #1c144a;
-            text-align: left;
-            padding: 8px;
-        }
-       
+    margin-left: 10px;
+    width: 86%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #1c144a;
+    text-align: left;
+    padding: 8px;
+}
 
-
-
-
+a{
+    color: #001C48;
+}
 </style>
 </head>
 <body>
-
-
 <div class="red-bar">
   <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
+  <a href="settings.html" class="fas fa-cog settings-icon"></a>
+  <a href="help.html" class="help-link">Need help?</a>
 </div>
 
 <img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
@@ -180,11 +194,10 @@ table {
 
 <p class="text-main"> Create a four-year plan </p>
 <p> 
-  <a class="square_page" style="  margin-left: 40px;  color: #dfdee7;" href="interestsurvey.html">Interest survey</a> | 
-  <a class="square_page" style="color: #dfdee7;" href="courserecomendation.html">Course recommendation</a> | 
-  <a class="square_page" style="color: #dfdee7;" href="resourcelinks.html">Resources Link</a>   |
-  <a class="square_page" style="color: #dfdee7;" href="mainweb.html"> Main Page </a>
-</p>
+  <a class="square_page" style="margin-left: 40px;" href="interestsurvey.html">Interest survey</a> | 
+  <a class="square_page" href="courserecomendation.html">Course recommendation</a> | 
+  <a class="square_page" href="resourcelinks.html">Resources Link</a> | 
+  <a class="square_page" href="mainweb.html"> Main Page </a>
 
 
 
@@ -289,13 +302,13 @@ table {
         <div class="col-md-12">
             <table>
               <tr>
-                <th style="background-color: #81d3eb;">GENERAL EDUCATION</th>
-                <th style="background-color: #81d3eb;" ></th>
+                <th style="color: white; background-color: #001C48;">GENERAL EDUCATION  (Example)</th>
+                <th style="background-color: #001C48;" ></th>
               </tr>
               <tr>
                 
-                <td  class="zg" >Composition (Foundation, complete 1 set)</td>
-                <td  class="zg" >Emphasis Courses (Take 5)</td>
+                <td style="background-color: #1e5188b3;" class="zg" >Composition (Foundation, complete 1 set)</td>
+                <td style="background-color: #1e5188b3;"  class="zg" >Emphasis Courses (Take 5)</td>
                
               </tr>
               <tr>
@@ -305,100 +318,116 @@ table {
                                     <li>ENGL 109H</li>
                                 </ul></td>
                 <td><ul>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
+                                    <li>ESOC 414</li>
+                                    <li>ISTA 311</li>
+                                    <li>ISTA 355</li>
+                                    <li>ISTA 421</li>
+                                    <li>ISTA 455</li>
+                                    <a href="https://ischool.arizona.edu/bs-information-science/curriculum-courses">More Emphasis courses</a>
                                 </ul></td>
               </tr>
               <tr>
-                <td class= "zg">Math Foundation</td>
-                <td class= "zg" >Computational Arts & Media (Take 1)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Math Foundation</td>
+                <td style="background-color: #1e5188b3;" class= "zg" >Computational Arts & Media (Take 1)</td>
               </tr>
               <tr>
                  <td><ul>
                                     <li>MATH 113 or 116 or 122A/B or higher</li>
-                                    
+                                                                        <a href="https://ischool.arizona.edu/bs-information-science/curriculum-courses">More Math Foundation course</a>
+
                                 </ul></td>
                 <td><ul>
-                                    <li></li>
+                                    <li>ISTA 301</li>
+                                    <a href="https://ischool.arizona.edu/bs-information-science/curriculum-courses">More Computational Arts & Media</a>
                                     
                                 </ul></td>
               </tr>
               <tr>
-                <td class= "zg">Second Language-2nd Semester Prof. (Foundation)</td>
-                <td class= "zg">Society (Take 1)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Second Language-2nd Semester Prof. (Foundation)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Society (Take 1)</td>
               </tr>
               <tr>
                 <td><ul>
-                  <li></li>
+                  <li>Spanish</li>
+                  <a href="https://clp.arizona.edu/courses/course-languages">More courses</a>
                   </ul>
                 </td>
                 <td><ul>
-                  <li></li>
+                  <li>ESOC 313</li>
+                  <a href="https://ischool.arizona.edu/bs-information-science/curriculum-courses">More Society courses</a>
+
                   </ul>
                 </td>
               </tr>
               
               
                <tr>
-                <td class= "zg">Introduction to GE (Take 1 Course)</td>
-                <td class= "zg">Engagement/Internship/Ind. Study (Take 1)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Introduction to GE (Take 1 Course)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Engagement/Internship/Ind. Study (Take 1)</td>
               </tr>
               <tr>
                 <td><ul>
-                  <li></li>
+                  <li>UNIV 101</li>
                   </ul>
                 </td>
                 <td><ul>
-                  <li></li>
-                  </ul>
-                </td>
-              </tr>
-              
-              
-              <tr>
-                <td class= "zg">Artist (Take 1 Course)</td>
-                <td class= "zg">Humanist (Take 1 Course)</td>
-              </tr>
-              <tr>
-                <td><ul>
-                  <li></li>
-                  </ul>
-                </td>
-                <td><ul>
-                  <li></li>
+                  <li>ESOC 480</li>
+                  <a href="https://ischool.arizona.edu/bs-information-science/curriculum-courses">More Engagement courses</a>
                   </ul>
                 </td>
               </tr>
               
               
-              
               <tr>
-                <td class= "zg">Natural Scientist (Take 1 Course</td>
-                <td class= "zg">Social Scientist (Take 1 Course)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Artist (Take 1 Course)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Humanist (Take 1 Course)</td>
               </tr>
               <tr>
                 <td><ul>
-                  <li></li>
+                  <li>ART 329</li>
+                  <a href="https://archive.catalog.arizona.edu/faculty/courses/994/artx.html">More Art courses</a>
                   </ul>
                 </td>
                 <td><ul>
-                  <li></li>
+                  <li>AFAS 160A1</li>
+                  <a href="https://ge.arizona.edu/approved-gened-courses#Humanist">More Humanist courses</a>
+
+                  </ul>
+                </td>
+              </tr>
+              
+              
+              
+              <tr>
+                <td style="background-color: #1e5188b3;" class= "zg">Natural Scientist (Take 1 Course)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Social Scientist (Take 1 Course)</td>
+              </tr>
+              <tr>
+                <td><ul>
+                  <li>ANTH 160D2</li>
+                  <a href="https://ge.arizona.edu/approved-gened-courses#Natural">More Natural Scientist Courses</a>
+
+                  </ul>
+                </td>
+                <td><ul>
+                  <li>AED 408</li>
+                  <a href="https://ge.arizona.edu/approved-gened-courses#Social">More Social Scientist Courses</a>
+
                   </ul>
                 </td>
               </tr>
               
               <tr>
-                <td class= "zg">Building Connections (Take 3 courses)</td>
-                <td class= "zg">GE Capstone Course (Take 1 Course)</td>
+                <td style="background-color: #1e5188b3;"  class= "zg">Building Connections (Take 3 courses)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">GE Capstone Course (Take 1 Course)</td>
               </tr>
               <tr>
                 <td><ul>
-                  <li></li>
-                    <li></li>
-                  <li></li>
+                  <li>ACBS 160D1</li>
+                    <li>AED 210</li>
+                  <li>AFAS 335</li>
+                  <a href="https://ge.arizona.edu/approved-gened-courses#BC">More Building Connections Courses</a>
+
             
                   </ul>
                 </td>
@@ -408,12 +437,16 @@ table {
                 </td>
               </tr>
               
-              
               <tr>
-                <td class= "zg">INFORMATION SCIENCE MAJOR
-            (approx. 45 units)
+                <td style="color: white; background-color: #001C48;"  class= "zg">INFORMATION SCIENCE MAJOR (approx. 45 units)</td>
+                <td style="color: white; background-color: #001C48;" class= "zg"></td>
+
+              </tr>
+
+              <tr>
+                <td style="background-color: #1e5188b3;" class= "zg">
             Core Courses (Take All)</td>
-                <td class= "zg">Research Methods (Take 1 Course)</td>
+                <td  style="background-color: #1e5188b3;" class= "zg">Research Methods (Take 1 Course)</td>
               </tr>
               <tr>
                 <td><ul>
@@ -435,24 +468,20 @@ table {
               
               
               <tr>
-                <td class= "zg">Emphasis Area (Select 1)</td>
-                <td class= "zg">Minor/2nd Major (18-21 Units):</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Emphasis Area (Select 1)</td>
+                <td style="background-color: #1e5188b3;" class= "zg">Minor/2nd Major (18-21 Units):</td>
               </tr>
               <tr>
                 <td><ul>
                   <li>Interactive & Immersive Technologies</li>
                     <li>Data Science</li>
-                  
-            
                   </ul>
                 </td>
                 <td><ul>
-                  <li></li>
-                    <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-            
+                  <a href="https://archive.catalog.arizona.edu/majors_minors/994/minors.html"> Minor list</a>
+                  <br>
+                  <a href="https://archive.catalog.arizona.edu/majors_minors/994/majors.html"> Major list</a>
+
                   </ul>
                 </td>
               </tr>
@@ -460,15 +489,17 @@ table {
               
               
               <tr>
-                <td> ELECTIVES (if needed to reach 120 units/42 UD)</td>
-                <td>Other Requirements</td>
+                <td style="background-color: #1e5188b3;" > ELECTIVES (if needed to reach 120 units/42 UD)</td>
+                <td style="background-color: #1e5188b3;">Other Requirements</td>
               </tr>
               <tr>
                 <td><ul>
+                  <a href="https://ischool.arizona.edu/undergraduate-programs/courses"> More courses</a>
+
+                  <!-- <li></li>
                   <li></li>
                   <li></li>
-                  <li></li>
-                  <li></li>
+                  <li></li> -->
                   
             
                   </ul>
@@ -491,7 +522,7 @@ table {
               
               
               <tr>
-                <td class= "zg"> GRADUATION REQUIREMENTS
+                <td  style="background-color: #1e5188b3;" class= "zg"> GRADUATION REQUIREMENTS
             Mid-Career Writing Assessment </td>
               </tr>
               <tr>
@@ -534,7 +565,7 @@ table {
     <p>Campus Accessibility</p>
   </div>
 </div>
-
+<script src="fouryearclient.js"></script>
 <script>
   function addCustomItem(resultBoxId) {
     var resultBox = document.getElementById(resultBoxId);

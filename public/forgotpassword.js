@@ -1,11 +1,3 @@
-function resetPassword() {
-    // reset password request 
-}
+// Add code to this file to make function request to send email verification
 
-var resetPasswordButton = document.getElementById("resetPasswordButton");
-
-
-resetPasswordButton.addEventListener("click", () => {
-    resetPassword()
-    window.location.href = "login.html";
-});
+// Add function requests to bring up an error when user enters anything but an email and
