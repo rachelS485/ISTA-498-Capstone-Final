@@ -194,14 +194,12 @@ a{
 
 <p class="text-main"> Create a four-year plan </p>
 <p> 
-  <button class="square_page" id="logout" style="margin-left: 40px; color: #dfdee7;">Logout</button>   |
-  <button class="square_page" id="save" style="color: #dfdee7;"> Save </button>
-</p>
-<p> 
-  <a class="square_page" style="  margin-left: 40px;  color: #dfdee7;" href="interestsurvey.html">Interest survey</a> | 
+  <a class="square_page" style="margin-left: 40px; color: #dfdee7;" href="mainweb.html"> Main Page </a>  |
+  <a class="square_page" style="color: #dfdee7;" href="interestsurvey.html">Interest survey</a> | 
   <a class="square_page" style="color: #dfdee7;" href="courserecomendation.html">Course recommendation</a> | 
   <a class="square_page" style="color: #dfdee7;" href="resourcelinks.html">Resources Link</a>   |
-  <a class="square_page" style="color: #dfdee7;" href="mainweb.html"> Main Page </a>
+  <button class="square_page" id="logout" style="color: #dfdee7;">Logout</button>   |
+  <button class="square_page" id="save" style="color: #dfdee7;"> Save </button>
 </p>
 
 
@@ -570,7 +568,6 @@ a{
     <p>Campus Accessibility</p>
   </div>
 </div>
-<script src="fouryearclient.js"></script>
 <script>
   let sem1 = new Set();
   let sem2 = new Set();
@@ -728,8 +725,8 @@ a{
         window.location.replace("login.html");
     };
     };
-};
-  document.getElementById("save").onclick = function savePlan(){
+  };
+  document.getElementById("save").onclick = function saveCurrentPlan(){
     //Sending and Receiving to Server
     let array1 = Array.from(sem1);
     let array2 = Array.from(sem2);
@@ -757,6 +754,36 @@ a{
       };
     };
   }
+
+  function savePlan(){
+    //Sending and Receiving to Server
+    let array1 = Array.from(sem1);
+    let array2 = Array.from(sem2);
+    let array3 = Array.from(sem3);
+    let array4 = Array.from(sem4);
+    let array5 = Array.from(sem5);
+    let array6 = Array.from(sem6);
+    let array7 = Array.from(sem7);
+    let array8 = Array.from(sem8);
+    let planStr = array1.join("*") + " : "+array2.join("*") + " : "+array3.join("*") + " : "+array4.join("*") + " : "+array5.join("*") + " : "+array6.join("*") + " : "+array7.join("*") + " : "+array8.join("*");
+    let payload = {fouryearplan: planStr};
+    console.log(planStr);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/savefouryearplan');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+      console.log(payload);
+      console.log("Sending from Client");
+      xhr.send(JSON.stringify(payload));
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState == 4 && xhr.status == 200){
+        console.log("Plan was saved!");
+        var response = JSON.parse(xhr.responseText);
+        console.log(response["savedplan"]);
+        console.log("Worked!");
+      };
+    };
+  }
+
 </script>
 
 
