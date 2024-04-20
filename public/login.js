@@ -37,11 +37,11 @@ document.getElementById("createAccountButton").onclick = function createUser(){
     let useremail = document.getElementById("emailcreate").value;
     let password = document.getElementById("passwordcreate").value;
     let major = "";
-    if (document.getElementById("major1").checked){
-        major = document.getElementById("major1").value;
+    if (document.getElementById("emphDs").checked){
+        major = document.getElementById("emphDs").value;
     }else{
-        if (document.getElementById("major2").checked){
-            major = document.getElementById("major2").value;
+        if (document.getElementById("emphIntTech").checked){
+            major = document.getElementById("emphIntTech").value;
         };
     };
     //Sending login info to server

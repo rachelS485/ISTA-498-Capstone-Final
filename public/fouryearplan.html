@@ -344,7 +344,7 @@ table {
               </tr>
               <tr>
                 <td><ul>
-                  <li>Spanish</li>
+                  <li>Spanish 102</li>
                   <a href="https://clp.arizona.edu/courses/course-languages">More courses</a>
                   </ul>
                 </td>
@@ -589,14 +589,14 @@ table {
           console.log("Worked!");
           if(response["plansaved"] != 'No plan'){
             resultArray = response["plansaved"].split(" : ");
-            sem1 = new Set(resultArray[0].split(" "));
-            sem2 = new Set(resultArray[1].split(" "));
-            sem3 = new Set(resultArray[2].split(" "));
-            sem4 = new Set(resultArray[3].split(" "));
-            sem5 = new Set(resultArray[4].split(" "));
-            sem6 = new Set(resultArray[5].split(" "));
-            sem7 = new Set(resultArray[6].split(" "));
-            sem8 = new Set(resultArray[7].split(" "));
+            sem1 = new Set(resultArray[0].split("*"));
+            sem2 = new Set(resultArray[1].split("*"));
+            sem3 = new Set(resultArray[2].split("*"));
+            sem4 = new Set(resultArray[3].split("*"));
+            sem5 = new Set(resultArray[4].split("*"));
+            sem6 = new Set(resultArray[5].split("*"));
+            sem7 = new Set(resultArray[6].split("*"));
+            sem8 = new Set(resultArray[7].split("*"));
             document.getElementById("resultBox1").innerHTML = buildInner(sem1);
             document.getElementById("resultBox2").innerHTML = buildInner(sem2);
             document.getElementById("resultBox3").innerHTML = buildInner(sem3);
@@ -660,7 +660,7 @@ table {
       }
       resultBox.innerHTML += "<div><span>" + additionalItemValue + "</span><span class='remove-item' onclick='removeItem(this.parentNode)'> - </span></div>";
       additionalItemInput.value = "";
-      console.log(resultBox);
+      savePlan();
     }
   }
 
@@ -698,6 +698,7 @@ table {
 
     }
     item.parentNode.removeChild(item);
+    savePlan();
   }
   document.getElementById("logout").onclick = function logoutUser(){
     //Sending login info to server
@@ -729,7 +730,7 @@ table {
     let array6 = Array.from(sem6);
     let array7 = Array.from(sem7);
     let array8 = Array.from(sem8);
-    let planStr = array1.join(" ") + " : "+array2.join(" ") + " : "+array3.join(" ") + " : "+array4.join(" ") + " : "+array5.join(" ") + " : "+array6.join(" ") + " : "+array7.join(" ") + " : "+array8.join(" ");
+    let planStr = array1.join("*") + " : "+array2.join("*") + " : "+array3.join("*") + " : "+array4.join("*") + " : "+array5.join("*") + " : "+array6.join("*") + " : "+array7.join("*") + " : "+array8.join("*");
     let payload = {fouryearplan: planStr};
     console.log(planStr);
     let xhr = new XMLHttpRequest();
