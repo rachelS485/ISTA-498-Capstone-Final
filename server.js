@@ -83,8 +83,15 @@ app.post('/login', (req, res) => {
                     console.log(JSON.stringify(dataSend));
                     res.send(JSON.stringify(dataSend));
                     console.log("Login Sent!");
-                }else{
-                    var dataSend = {"login": "Login failed"};
+                }
+                if(resultUser && resultUser[0]['password'] != userpassword){
+                    var dataSend = {"login": "The password you have entered is incorrect!"};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("Login Sent!");
+                }
+                if(resultUser.length == 0 && resultUser[0]['password'] != userpassword){
+                    var dataSend = {"login": "The username and/or password is incorrect!"};
                     console.log(JSON.stringify(dataSend));
                     res.send(JSON.stringify(dataSend));
                     console.log("Login Sent!");
@@ -139,10 +146,55 @@ app.post('/createaccount', (req, res) => {
                         let resultUser = results.rows;
                         console.log(resultUser);
                         if(resultUser){
-                            var dataSend = {"account": "Account creation success!"};
+                            var dataSend = {"account": "Account worked"};
                             console.log(JSON.stringify(dataSend));
                             res.send(JSON.stringify(dataSend));
                             console.log("Account creation is successful!");
+                        };
+                           
+                    });
+                };
+            });
+        };
+    });  
+});
+
+app.post('/forgotpassword', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    let useremail = req.body.useremail;
+    let userpassword = req.body.newpassword;
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM users WHERE email = '"+useremail+"'";
+            client.query(checkQuery, function(error, results){
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser);
+                if(resultUser.length == 0){
+                    console.log(useremail);
+                    var dataSend = {"passwordreset": "Your email does not exist!"};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("Password rest not successful!");
+                }else{
+                    let updatePasswordQuery = "UPDATE users SET password = $1 WHERE email = $2";
+                    client.query(updatePasswordQuery, [userpassword, useremail], (error, results)=>{
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"passwordreset": "Reset worked"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Password reset is successful!");
                         };
                            
                     });

@@ -203,15 +203,17 @@
             <br>
             
             <!-- Replace onclick with function to swap pages to forgotpassword.html -->
-            <a id="forgotpassword" onclick="switchToForgotPassword()"  >Forgot Password?</a>
-
+            <a id="forgotpassword">Forgot Password?</a>
             <br>
             <br>
 
             <!-- make login.js file to use onlclick=login() -->
             <button class="index-btn-style animated-btn" type="button" id="loginButton">Login</button>
+            <br>
+            <br>
 
-            <div id="throw-error"></div>
+            <a id="loginError1" style="display: none; color: red">The password that you have entered is incorrect</a>
+            <a id="loginError2" style="display: none; color: red">The username and/or password you have entered is incorrect</a>
 
             <h1>Create Account</h1>
 
@@ -245,6 +247,11 @@
 
             <!-- make login.js file to use onlclick=createAccount() -->
             <input class="index-btn-style animated-btn" type="submit" id="createAccountButton" value="Create">
+
+            <br>
+            <br>
+            <a id="createError" style="display: none; color: red">The email you have entered is already in use</a>
+            <br>
 
         </form>
 
