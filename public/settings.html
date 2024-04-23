@@ -226,8 +226,8 @@
         </h2>
     </div>
 
-    <div class='logoutButton' style="margin: 0; padding: 0;">
-        <p class='buttonText' onclick="logout()">Logout</p>
+    <div class='logoutButton' id="settingsLogout" style="margin: 0; padding: 0;">
+        <p class='buttonText'>Logout</p>
     </div>
 
     <br>
@@ -241,16 +241,6 @@
 
             </div>
 
-            <div class='tabButtons' id='passwordButton'>
-            
-                <p class='buttonText'>Password</p>
-            </div>
-
-            <div class='tabButtons' id='emailTabButton'>
-                <p class='buttonText'>Notifications</p>
-
-            </div>
-
             <div class='tabButtons' id='instructions'>
                 <p class='buttonText'>Instructions</p>
 
@@ -260,23 +250,49 @@
 
         <div id='settings'>
 
-            <form>
-                <div class="accountSettings" style="margin-top: 10px;">
-                    <label for="accountMajor" class="accountLabels">Major:</label>
-                    <span style="margin-right: 7px;">Major</span>
-                    <input type="text" id="currentMajor" class="accountInputs" name="major" value="" required="">
-        
-                </div>
-                <div class="accountSettings" style="margin-top: 10px;">
-                    <label for="email" class="accountLabels">Email:</label>
-                    <span style="margin-right: 7px;">sample@arizona.edu</span>
-                    <input type="email" id="email" class="accountInputs" name="email" value="" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an Email" required="">
-        
-                </div>
-                <div class="accountSettings" style="margin-top: 10px;">
-                    <input type="submit" id="accountSettingsSave" value="Save">
-        
-                </div>
+            <form> 
+                <div id='currRemindPref'> 
+                    <div class='emailSettings' style='margin-top: 0;'> 
+                        <label class='emailLabels' >Current Settings</label> 
+                        <br> <br> 
+                        <label class='emailLabels' >Email:</label> 
+                        <span id="currentEmail">sample@arizona.edu</span> <br>
+                        <br>
+                        <label class='emailLabels' >Password:</label> 
+                        <span id="currentPassword">sample1234</span> <br>
+                        <br>
+                        <label class='emailLabels' >Major:</label> 
+                        <span id="currentMajor">sample major</span> <br>
+                        <br>
+                        <label class='emailLabels' >Opted for Email Notifications:</label> 
+                        <span id="currentNotify">True</span> <br>
+                    </div> 
+                </div> 
+            </form> 
+            
+            <form> 
+                <div id='updtRemindPref'> 
+                    <label class='emailLabels' >Update Settings</label> <br> <br> 
+                    <label for='email' class='emailLabels'>Email:</label> 
+                    <input type='email' id='updateEmail' pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$' title='Must be an email' required=''> <br> <br>
+
+                    <label for='major' class='emailLabels'>Password:</label> 
+                    <input type='major' id='updatePassword' required=''> <br> <br> 
+                    
+                    <label for='major' class='emailLabels'>Major:</label> 
+                    <input type='major' id='updateMajor' required=''> <br> <br> 
+
+                    <label class='emailLabels' >Opted In:</label> 
+                    <input type='radio' id='optYes' name='opted' required='' value='true'> 
+                    <label for='optYes'>True</label> 
+                    <input type='radio' id='optNo' name='opted' required='' value='false'> 
+                    <label for='optNo'>False</label><br>
+
+                    <div class='emailSettings' style='margin-top: 10px;'> 
+                        <input type='submit' id='accountSettingsSave' value='Save'> 
+                    </div> 
+
+                </div> 
             </form>
             
         </div>

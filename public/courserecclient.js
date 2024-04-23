@@ -54,7 +54,6 @@ window.onload = function(e){
 };
 document.getElementById("logoutCourseRec").onclick = function logoutUser(){
     //Sending login info to server
-    savePlan();
     let payload = {logout: "Logging out user"};
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/logout');

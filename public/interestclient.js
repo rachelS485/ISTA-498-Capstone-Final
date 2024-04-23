@@ -885,7 +885,6 @@ function saveImmersiveResponse(){
 
 document.getElementById("logoutInterest").onclick = function logoutUser(){
     //Sending login info to server
-    savePlan();
     let payload = {logout: "Logging out user"};
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/logout');
