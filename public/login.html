@@ -189,58 +189,65 @@
 
         <h1>Login</h1>
 
-        <label class="acc-style" for="emaillogin">Email</label>
-        <br>
+        <form>
+            <label class="acc-style" for="emaillogin">Email</label>
+            <br>
 
-        <input type="text" id="emaillogin" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an email" required=''>
-        <br>
-        <br>
+            <input type="email" id="emaillogin" pattern="^[A-Za-z0-9]+@arizona\.edu$" title="Must be a school email ( e.g. @arizona.edu )" required=''>
+            <br>
+            <br>
 
-        <label class="acc-style" for="passwordlogin">Password</label>
-        <br>
+            <label class="acc-style" for="passwordlogin">Password</label>
+            <br>
 
-        <input type="password" id="passwordlogin" required=''>
+            <input type="password" id="passwordlogin" minlength="8" required=''>
+            
+            <!-- Replace onclick with function to swap pages to forgotpassword.html -->
+            <a id="forgotpassword" onclick="" >Forgot Password?</a>
+
+            <br>
+            <br>
+
+            <!-- make login.js file to use onlclick=login() -->
+            <input class="index-btn-style animated-btn" type="submit" id="loginButton" value="Login"></button>
+
+            <div id="throw-error"></div>
+        </form>
         
-        <!-- Replace onclick with function to swap pages to forgotpassword.html -->
-        <a id="forgotpassword" onclick="" >Forgot Password?</a>
-
-        <br>
-        <br>
-
-        <!-- make login.js file to use onlclick=login() -->
-        <button class="index-btn-style animated-btn" type="button" id="loginButton">Login</button>
-
-        <div id="throw-error"></div>
 
         <h1>Create Account</h1>
 
-        <label class="acc-style" for="emailcreate">Email</label>
-        <br>
+        <form>
+            <label class="acc-style" for="emailcreate">Email</label>
+            <br>
 
-        <input type="text" id="emailcreate" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" title="Must be an email" required=''>
-        <br>
-        <br>
+            <input type="email" id="emailcreate" pattern="^[A-Za-z0-9]+@arizona\.edu$" title="Must be a school email ( e.g. @arizona.edu )" required=''>
+            <br>
+            <br>
 
-        <label class="acc-style" for="passwordcreate">Password</label>
-        <br>
+            <label class="acc-style" for="passwordcreate">Password</label>
+            <br>
 
-        <input type="password" id="passwordcreate" required=''>
-        <br>
-        <br>
-        <br>
-        <br>
-        <label class="acc-style" for="emailcreate">Major</label>
-        <input type="radio" id="major1" class="options" value="BS in IS data science emphasis">
-        <label for="I10E" class="options">Bachelors of Science in Information Science with an emphasis in Data Science</label><br>
+            <input type="password" id="passwordcreate" minlength="8" required=''>
+            <br>
+            <br>
+            <br>
+            <br>
+            <label class="acc-style" for="emailcreate">Major</label>
+            <input type="radio" id="major1" class="options" value="BS in IS data science emphasis" name="majorSelect" required=''>
+            <label for="major1" class="options">Bachelors of Science in Information Science with an emphasis in Data Science</label><br>
+            
+            <input type="radio" id="major2" class="options" value="BS in IS data science emphasis" name="majorSelect" required=''>
+            <label for="major2" class="options">Bachlors of Science in Information Science with emphasis in Interactive and Immersive Technologies</label><br>
+
+            <br>
+            <br>
+
+            <!-- make login.js file to use onlclick=createAccount() -->
+            <input class="index-btn-style animated-btn" type="submit" id="createAccountButton" value="Create"></button>
+        </form>
+
         
-        <input type="radio" id="major2" class="options" value="BS in IS data science emphasis">
-        <label for="I10E" class="options">Bachlors of Science in Information Science with emphasis in Interactive and Immersive Technologies</label><br>
-
-        <br>
-        <br>
-
-        <!-- make login.js file to use onlclick=createAccount() -->
-        <button class="index-btn-style animated-btn" type="button" id="createAccountButton">Create</button>
 
     </div>
 
