@@ -10,18 +10,6 @@ const cookieParser = require('cookie-parser');
 
 const Pool = require('pg').Pool;
 
-// Security
-const crypto = require('crpyto')
-const algorithm = 'aes-256-cbc';
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
-const cipher = crypto.createCipheriv(algorithm, key, iv);
-const helmet = require('helmet');
-const https = require('https');
-
-
-
-
 const db = {
     user:'postgres',
     host:'localhost',
@@ -33,8 +21,14 @@ const db = {
 const pool = new Pool(db);
 
 const app = express();
-const httpsServer = https.createServer(app);
 
+// Evan Security
+const crypto = require('crpyto')
+const algorithm = 'aes-256-cbc';
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+const cipher = crypto.createCipheriv(algorithm, key, iv);
+const helmet = require('helmet');
 function firewall_detect(str_to_detect){
     var regexp_rule =[
         /select.+(from|limit)/i,
@@ -76,6 +70,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'html');
 //app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
+
+// Evan Security
 app.use(helmet());
 
 
@@ -106,13 +102,12 @@ app.get('/mainweb', (req, res) => {
 
 //Login, Logout, and Create account functionality
 app.post('/login', (req, res) => {
-
     console.log("Server received login info");
     res.setHeader('Content-Type', 'text/html');
-
     let useremail = req.body.useremail;
     let userpassword = req.body.password;
 
+    // Evan Security
     // Firewall Implementation
     if(firewall_detect(useremail) == false && firewall_detect(userpassword) == false){
         next();
@@ -124,12 +119,12 @@ app.post('/login', (req, res) => {
         if(error){
             console.log(error);
         }else{
-
-            // -- REPLACE ID_SLOT WITH THE ID COLUMN
-            let loginquery = "SELECT DecryptByKey(EncryptedEmail, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, ID_SLOT))) AS 'email', " +
-                             "DecryptByKey(EncryptedPassword, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, ID_SLOT))) AS 'password', " +
-                             "DecryptByKey(EncryptedMajor, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, ID_SLOT))) AS 'major' " +
-                             "FROM users WHERE EncryptedEmail = '" + useremail + "';";
+            
+            // Evan Security
+            let loginquery = "SELECT users.userid, notify, DecryptByKey(EncryptedEmail, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'email', " +
+                             "DecryptByKey(EncryptedPassword, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'password', " +
+                             "DecryptByKey(EncryptedMajor, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'major' " +
+                             "FROM users WHERE EncryptedEmail = EncryptByKey(Key_GUID('et1lhaets9'), N'" + useremail + "', 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid)));";
 
             client.query(loginquery, function(error, results){
                 done();
@@ -141,37 +136,23 @@ app.post('/login', (req, res) => {
                 if(resultUser && resultUser[0]['password'] == userpassword){
                     req.session.user = resultUser;
                     app.locals.username = resultUser[0]['email'];
-                    // Encrypt data above
-
-                    let encrypted1 = cipher.update(app.locals.username, 'utf8', 'hex');
-                    encrypted1 += cipher.final('hex');
-
-                    app.locals.username = encrypted1
-                    
                     app.locals.login = true;
                     console.log(resultUser[0]['email']);
                     var dataSend = {"login": "Login worked"};
-                    // Encrypt data above
-
-                    let encrypted2 = cipher.update(dataSend, 'utf8', 'hex');
-                    encrypted2 += cipher.final('hex');
-
-
-                    
                     console.log(JSON.stringify(dataSend));
-                    res.send(JSON.stringify(encrypted2));
+                    res.send(JSON.stringify(dataSend));
                     console.log("Login Sent!");
-                }else{
-                    var dataSend = {"login": "Login failed"};
-                    // Encrypt data above
-
-
-                    let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                    encrypted += cipher.final('hex');
-
-                    
+                }
+                if(resultUser && resultUser[0]['password'] != userpassword){
+                    var dataSend = {"login": "The password you have entered is incorrect!"};
                     console.log(JSON.stringify(dataSend));
-                    res.send(JSON.stringify(encrypted));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("Login Sent!");
+                }
+                if(resultUser.length == 0 && resultUser[0]['password'] != userpassword){
+                    var dataSend = {"login": "The username and/or password is incorrect!"};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
                     console.log("Login Sent!");
                 };
         });
@@ -187,21 +168,13 @@ app.post('/logout', (req, res) => {
     app.locals.login = false;
     var dataSend = {"test": "Logout worked"};
     console.log(JSON.stringify(dataSend));
-    // Encrypt data above
-
-
-    let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-    encrypted += cipher.final('hex');
-
-                    
-    res.send(JSON.stringify(encrypted));
+    res.send(JSON.stringify(dataSend));
     console.log("Logout Sent!");
 });
 
 app.post('/createaccount', (req, res) => {
     console.log("Server received login info");
     res.setHeader('Content-Type', 'text/html');
-
     let useremail = req.body.useremail;
     let userpassword = req.body.password;
     let major = req.body.major;
@@ -214,82 +187,103 @@ app.post('/createaccount', (req, res) => {
     }
 
     pool.connect(function (error, client, done){
-
         if(error){
-
             console.log(error);
+        }else{
+            
+            // Evan security
+            let checkQuery = "SELECT users.userid, notify, DecryptByKey(EncryptedEmail, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'email', " +
+                             "DecryptByKey(EncryptedPassword, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'password', " +
+                             "DecryptByKey(EncryptedMajor, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'major' " +
+                             "FROM users WHERE EncryptedEmail = EncryptByKey(Key_GUID('et1lhaets9'), N'" + useremail + "', 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid)));";
 
-        }
-        
-        else{
-
-            // Changed sql query to decrpyt
-            // Replace ID_SLOT with the id column in users
-            let checkQuery = "SELECT DecryptByKey(EncryptedEmail, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, CreditCardID))) AS 'email', " +
-                             "DecryptByKey(EncryptedPassword, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, CreditCardID))) AS 'password', " +
-                             "DecryptByKey(EncryptedMajor, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, CreditCardID))) AS 'major' " +
-                             "FROM users WHERE EncryptedEmail = '" + useremail + "';";
-
-            client.query(checkQuery, function(error, results) {
+            client.query(checkQuery, function(error, results){
                 if(error){
-
                     throw error;
-
                 };
-
                 let resultUser = results.rows;
                 console.log(resultUser);
-
-                if(resultUser.length > 0) {
-
+                if(resultUser.length > 0){
                     console.log(useremail);
                     var dataSend = {"account": "User email already exists!"};
                     console.log(JSON.stringify(dataSend));
-                    // Encrypt data above
-
-                    let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                    encrypted += cipher.final('hex');
-
-
-                    
-                    res.send(JSON.stringify(encrypted));
+                    res.send(JSON.stringify(dataSend));
                     console.log("Account creation not successful!");
+                }else{
 
-                }
+                     // Evan security
+                    let createAccountQuery = "INSERT INTO users (EncryptedEmail,EncryptedPassword,EncryptedMajor, notify) VALUES " +
+                "(EncryptByKey(Key_GUID('et1lhaets9'), N$1, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))), " +
+                "EncryptByKey(Key_GUID('et1lhaets9'), N$2, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))), " +
+                "EncryptByKey(Key_GUID('et1lhaets9'), N$3, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))), $4);";
                 
-                else{
-
-                    // Replace ID_SLOT with the id column in users
-                    let createAccountQuery = "INSERT INTO users (EncryptedEmail,EncryptedPassword,EncryptedMajor) VALUES " +
-                                             "(EncryptByKey(Key_GUID('et1lhaets9'), N$1, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, ID_SLOT)), " +
-                                             "EncryptByKey(Key_GUID('et1lhaets9'), N$2, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, ID_SLOT)), " +
-                                             "EncryptByKey(Key_GUID('et1lhaets9'), N$3, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, ID_SLOT)));";
-
-                    client.query(createAccountQuery, [useremail, userpassword, major], (error, results)=>{
-
+                    
+                    client.query(createAccountQuery, [useremail, userpassword, major, true], (error, results)=>{
                         done();
-
                         if(error){
-
                             throw error;
-
                         };
-
                         let resultUser = results.rows;
                         console.log(resultUser);
-                        
                         if(resultUser){
-                            var dataSend = {"account": "Account creation success!"};
+                            var dataSend = {"account": "Account worked"};
                             console.log(JSON.stringify(dataSend));
-                            // Encrypt data above
-
-
-                            let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                            encrypted += cipher.final('hex');
-
-                    
-                            res.send(JSON.stringify(encrypted));
+                            res.send(JSON.stringify(dataSend));
                             console.log("Account creation is successful!");
+                        };
+                           
+                    });
+                };
+            });
+        };
+    });  
+});
+
+app.post('/forgotpassword', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    let useremail = req.body.useremail;
+    let userpassword = req.body.newpassword;
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+
+            // Evan security
+            let checkQuery = "SELECT users.userid, notify, DecryptByKey(EncryptedEmail, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'email', " +
+                             "DecryptByKey(EncryptedPassword, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'password', " +
+                             "DecryptByKey(EncryptedMajor, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, users.userid))) AS 'major' " +
+                             "FROM users WHERE EncryptedEmail = EncryptByKey(Key_GUID('et1lhaets9'), N'" + useremail + "', 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid)));";
+
+            client.query(checkQuery, function(error, results){
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser);
+                if(resultUser.length == 0){
+                    console.log(useremail);
+                    var dataSend = {"passwordreset": "Your email does not exist!"};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("Password rest not successful!");
+                }else{
+
+                    // Evan security
+                    let updatePasswordQuery = "UPDATE users SET EncryptedPassword = EncryptByKey(Key_GUID('et1lhaets9'), N$1, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))) WHERE EncryptedEmail = EncryptByKey(Key_GUID('et1lhaets9'), N$2, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid)))";
+                    
+                    client.query(updatePasswordQuery, [userpassword, useremail], (error, results)=>{
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"passwordreset": "Reset worked"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Password reset is successful!");
                         };
                            
                     });
@@ -308,18 +302,7 @@ app.get('/', (req, res) => {
         res.redirect('/login');
     }
 });
-
-//TODO
-//6-10pm
-//1. Get data take the course rec data and put into the table if the user id does not exist if it does then update. DONE
-//2. Adjust the course rec code to SELECT * from the table instead to pull alwasys on onload. DONE
-//3. Save the interest form results. Update or create depending on if the user is new DONE
-//4. Adjust the insterest form summary to be an onload that pulls everytime the page loads as well DONE
-
-//10-2am
-//5. pull data from 4 year plan
-//6. Update or Create in table
-//7. Use onload to always pull from table using SELECT *. 
+ 
 
 // Handling request  
 app.post("/dataformresultsforalgorithm", (req, res) => { 
@@ -338,7 +321,6 @@ app.post("/dataformresultsforalgorithm", (req, res) => {
     }
 
 
-
     console.log(dataString);
     const spawner = require('child_process').spawn;
 
@@ -353,6 +335,8 @@ app.post("/dataformresultsforalgorithm", (req, res) => {
             if(error){
                 console.log(error);
             }else{
+
+                //Evan Security
                 let checkQuery = "SELECT userid, " +
                         "DecryptByKey(EncryptedRecString, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, userid))) AS 'courserecstring', " +
                         "FROM courserecs WHERE userid = '"+req.session.user[0]['userid']+"';";
@@ -361,11 +345,11 @@ app.post("/dataformresultsforalgorithm", (req, res) => {
                     if(error){
                         throw error;
                     };
-
                     let resultUser = result.rows;
                     console.log(resultUser);
                     if(resultUser.length > 0){
 
+                        // Evan Security
                         let updatecourseQuery = "UPDATE courserecs SET EncryptedRecString = " +
                                                 "EncryptByKey(Key_GUID('et1lhaets9'), N$1, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))) " + 
                                                 "WHERE userid = $2;";
@@ -379,18 +363,13 @@ app.post("/dataformresultsforalgorithm", (req, res) => {
                             if(resultUser){
                                 var dataSend = {"courses": "Update sucess!"};
                                 console.log(JSON.stringify(dataSend));
-                                // Encrypt data above
-
-                                let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                                encrypted += cipher.final('hex');
-
-
-                    
-                                res.send(JSON.stringify(encrypted));
+                                res.send(JSON.stringify(dataSend));
                                 console.log("Update successful!");
                             };  
                         });
                     }else{
+
+                        // Evan Security
                         let createCourseQuery = "INSERT INTO courserecs (userid, EncryptedRecString) VALUES (" +
                                                 "$1, EncryptByKey(Key_GUID('et1lhaets9'), N$2, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))));";
 
@@ -404,14 +383,7 @@ app.post("/dataformresultsforalgorithm", (req, res) => {
                             if(resultUser){
                                 var dataSend = {"courses": "Added new course recs!"};
                                 console.log(JSON.stringify(dataSend));
-                                // Encrypt data above
-
-
-                                let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                                encrypted += cipher.final('hex');
-
-                    
-                                res.send(JSON.stringify(encrypted));
+                                res.send(JSON.stringify(dataSend));
                                 console.log("Course recs added successfully!");
                             };
                             
@@ -430,9 +402,11 @@ app.post("/updatecourseui", (req, res) => {
         if(error){
             console.log(error);
         }else{
+            
+            //Evan Security
             let checkQuery = "SELECT userid, DecryptByKey(EncryptedRecString, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, userid))) AS 'courserecstring' " +
                              "FROM courserecs WHERE userid = '"+req.session.user[0]['userid']+"';";
-
+                             
             client.query(checkQuery, function(error, result){
                 if(error){
                     throw error;
@@ -440,10 +414,7 @@ app.post("/updatecourseui", (req, res) => {
                 let resultUser = result.rows;
                 console.log(resultUser);
                 if(resultUser.length > 0){
-
-                    let coursesQuery = "SELECT DecryptByKey(EncryptedRecString, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, userid))) AS 'courserecstring' " +
-                                       "FROM courserecs WHERE userid = '"+req.session.user[0]['userid']+"';";
-
+                    let coursesQuery = "SELECT courserecstring FROM courserecs WHERE userid = '"+req.session.user[0]['userid']+"'";
                     client.query(coursesQuery, function(error, result){
                         done();
                         if(error){
@@ -451,15 +422,15 @@ app.post("/updatecourseui", (req, res) => {
                         };
                         let resultUser = result.rows;
                         console.log(resultUser);
-                        var dataSend = {"coursematches": resultUser[0]['courserecstring']};
-                        console.log(JSON.stringify(dataSend));
-                        // Encrypt data above
+                        var dataSend = {"coursematches": resultUser[0]['courserecstring']}
 
+                        //Evan Security
                         let encrypted = cipher.update(dataSend, 'utf8', 'hex');
                         encrypted += cipher.final('hex');
+                        // Also changed next the res.send()'s amd console.log()'s datasend variable to use encrpyted
 
 
-                    
+                        console.log(JSON.stringify(encrypted));
                         res.send(JSON.stringify(encrypted));
                         console.log("Courses sent!");
                     });
@@ -467,14 +438,7 @@ app.post("/updatecourseui", (req, res) => {
                 else{
                     var dataSend = {"coursematches": 'No courses'};
                     console.log(JSON.stringify(dataSend));
-                    // Encrypt data above
-
-
-                    let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                    encrypted += cipher.final('hex');
-
-                    
-                    res.send(JSON.stringify(encrypted));
+                    res.send(JSON.stringify(dataSend));
                     console.log("No courses yet!");
                 };
 
@@ -489,21 +453,11 @@ app.post("/saveinterstformsummary", (req, res)=>{
     res.setHeader('Content-Type', 'text/html');
     let interstform = req.body.interestform;
 
-    // Firewall Implementation
-    if(firewall_detect(interstform) == false){
-        next();
-    }else{
-        res.send("Attack detected, intercepted")
-    }
-
     pool.connect(function (error, client, done){
         if(error){
             console.log(error);
         }else{
-
-            let checkQuery = "SELECT userid, DecryptByKey(EncryptedSummString, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, userid))) AS 'interstsumarystring' " +
-                             "FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"';";
-
+            let checkQuery = "SELECT * FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"'";
             client.query(checkQuery, function(error, result){
                 if(error){
                     throw error;
@@ -511,10 +465,7 @@ app.post("/saveinterstformsummary", (req, res)=>{
                 let resultUser = result.rows;
                 console.log(resultUser);
                 if(resultUser.length > 0){
-
-                    let updateInterestsQuery = "UPDATE interestresults SET EncryptedSummString = EncryptByKey(Key_GUID('et1lhaets9'), N$1, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))) " + 
-                                               "WHERE userid = $2;";
-
+                    let updateInterestsQuery = "UPDATE interestresults SET interstsumarystring = $1 WHERE userid = $2";
                     client.query(updateInterestsQuery, [interstform, req.session.user[0]['userid']], (error, results)=>{
                         if(error){
                             throw error;
@@ -524,22 +475,12 @@ app.post("/saveinterstformsummary", (req, res)=>{
                         if(resultUser){
                             var dataSend = {"interests": "Update sucess!"};
                             console.log(JSON.stringify(dataSend));
-                            // Encrypt data above
-
-                            let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                            encrypted += cipher.final('hex');
-
-
-                    
-                            res.send(JSON.stringify(encrypted));
+                            res.send(JSON.stringify(dataSend));
                             console.log("Update successful!");
                         };  
                     });
                 }else{
-                    
-                    let createInterstQuery = "INSERT INTO interestresults (userid, EncryptedSummString) " +
-                                             "VALUES ($1, EncryptByKey(Key_GUID('et1lhaets9'), N$2, 1, HASHBYTES('SHA2_256', CONVERT( varbinary, userid))));";
-
+                    let createInterstQuery = "INSERT INTO interestresults (userid, interstsumarystring) VALUES ($1, $2)";
                     client.query(createInterstQuery, [req.session.user[0]['userid'], interstform], (error, results)=>{
                         done();
                         if(error){
@@ -550,14 +491,7 @@ app.post("/saveinterstformsummary", (req, res)=>{
                         if(resultUser){
                             var dataSend = {"interests": "Added new interests!"};
                             console.log(JSON.stringify(dataSend));
-                            // Encrypt data above
-
-                            let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                            encrypted += cipher.final('hex');
-
-
-                    
-                            res.send(JSON.stringify(encrypted));
+                            res.send(JSON.stringify(dataSend));
                             console.log("Interests added successfully!");
                         };
                         
@@ -577,10 +511,7 @@ app.post("/loadinterests", (req, res)=>{
         if(error){
             console.log(error);
         }else{
-
-            let checkQuery = "SELECT userid, DecryptByKey(EncryptedSummString, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, userid))) AS 'interstsumarystring' " +
-                             "FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"';";
-                             
+            let checkQuery = "SELECT * FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"'";
             client.query(checkQuery, function(error, result){
                 if(error){
                     throw error;
@@ -588,10 +519,7 @@ app.post("/loadinterests", (req, res)=>{
                 let resultUser = result.rows;
                 console.log(resultUser);
                 if(resultUser.length > 0){
-
-                    let interestsQuery = "SELECT DecryptByKey(EncryptedSummString, 1 , HASHBYTES('SHA2_256', CONVERT(varbinary, userid))) AS 'interstsumarystring' " +
-                                         "FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"';";
-
+                    let interestsQuery = "SELECT interstsumarystring FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"'";
                     client.query(interestsQuery, function(error, result){
                         done();
                         if(error){
@@ -600,28 +528,22 @@ app.post("/loadinterests", (req, res)=>{
                         let resultUser = result.rows;
                         console.log(resultUser);
                         var dataSend = {"insterestsaved": resultUser[0]['interstsumarystring']};
-                        console.log(JSON.stringify(dataSend));
-                        // Encrypt data above
 
+                        //Evan Security
                         let encrypted = cipher.update(dataSend, 'utf8', 'hex');
                         encrypted += cipher.final('hex');
+                        // Also changed next the res.send()'s amd console.log()'s datasend variable to use encrpyted
 
 
-                    
+                        
+                        console.log(JSON.stringify(encrypted));
                         res.send(JSON.stringify(encrypted));
                         console.log("Intersts sent!");
                     });
                 }else{
                     var dataSend = {"insterestsaved": 'No intersts'};
                     console.log(JSON.stringify(dataSend));
-                    // Encrypt data above
-
-
-                    let encrypted = cipher.update(dataSend, 'utf8', 'hex');
-                    encrypted += cipher.final('hex');
-
-                    
-                    res.send(JSON.stringify(encrypted));
+                    res.send(JSON.stringify(dataSend));
                     console.log("No intersts yet!");
                 };
 
@@ -630,7 +552,175 @@ app.post("/loadinterests", (req, res)=>{
     });
 });
 
+app.post("/savefouryearplan", (req, res)=>{
+    console.log("Server received");
+    res.setHeader('Content-Type', 'text/html');
+    let savedPlan = req.body.fouryearplan;
+
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(checkQuery, function(error, result){
+                if(error){
+                    throw error;
+                };
+                let resultUser = result.rows;
+                console.log(resultUser);
+                if(resultUser.length > 0){
+                    let updateInterestsQuery = "UPDATE fouryearplan SET planstring = $1 WHERE userid = $2";
+                    client.query(updateInterestsQuery, [savedPlan, req.session.user[0]['userid']], (error, results)=>{
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"savedplan": "Update sucess!"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Update successful!");
+                        };  
+                    });
+                }else{
+                    let createInterstQuery = "INSERT INTO fouryearplan (userid, planstring) VALUES ($1, $2)";
+                    client.query(createInterstQuery, [req.session.user[0]['userid'], savedPlan], (error, results)=>{
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"savedplan": "Added new interests!"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Plan added successfully!");
+                        };
+                        
+                    });
+                };
+
+            });
+        }
+    });
+
+});
+
+app.post("/updatfouryearplanui", (req, res)=>{
+    console.log("Server received");
+    res.setHeader('Content-Type', 'text/html');
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(checkQuery, function(error, result){
+                if(error){
+                    throw error;
+                };
+                let resultUser = result.rows;
+                console.log(resultUser);
+                if(resultUser.length > 0){
+                    let interestsQuery = "SELECT planstring FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+                    client.query(interestsQuery, function(error, result){
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = result.rows;
+                        console.log(resultUser);
+                        var dataSend = {"plansaved": resultUser[0]['planstring']};
+
+                        //Evan Security
+                        let encrypted = cipher.update(dataSend, 'utf8', 'hex');
+                        encrypted += cipher.final('hex');
+                        // Also changed next the res.send()'s amd console.log()'s datasend variable to use encrpyted
+
+
+                        
+                        
+                        console.log(JSON.stringify(encrypted));
+                        res.send(JSON.stringify(encrypted));
+                        console.log("Four year plan sent!");
+                    });
+                }else{
+                    var dataSend = {"plansaved": 'No plan'};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("No four plan yet!");
+                };
+
+            });
+        }
+    });
+});
+//Settings
+app.post('/loadsettings', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let getaccountQuery = "SELECT email, password, major, notify FROM users WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(getaccountQuery, function(error, results){
+                done();
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser[0]);
+                var dataSend = {"email": resultUser[0]['email'], "password": resultUser[0]['password'], "major": resultUser[0]['major'], "notify": resultUser[0]['notify'] };
+
+                //Evan Security
+                let encrypted = cipher.update(dataSend, 'utf8', 'hex');
+                encrypted += cipher.final('hex');
+                // Also changed next the res.send()'s amd console.log()'s datasend variable to use encrpyted
+
+
+                
+                
+                
+                console.log(JSON.stringify(encrypted));
+                res.send(JSON.stringify(encrypted));
+                console.log("Account info sent!");
+        });
+
+        };
+    });
+});
+app.post('/updatesettings', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    let updateEmail = req.body.email;
+    let updatePassword = req.body.password;
+    let updateMajor = req.body.major;
+    let updateNotify = req.body.notify;
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let updateaccountQuery = "UPDATE users SET email = $1, password = $2, major = $3, notify = $4 WHERE userid = $5";
+            client.query(updateaccountQuery, [updateEmail, updatePassword, updateMajor, updateNotify, req.session.user[0]['userid']], (error, results) =>{
+                done();
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser[0]);
+                var dataSend = {"updateAccount": "Completed"};
+                console.log(JSON.stringify(dataSend));
+                res.send(JSON.stringify(dataSend));
+                console.log("Account info updated!");
+            });
+
+        };
+    });
+});
+
 //Server setup
-httpsServer.listen(3000, () => {
+app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
