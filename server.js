@@ -516,7 +516,6 @@ app.post("/updatfouryearplanui", (req, res)=>{
         }
     });
 });
-
 //Settings
 app.post('/loadsettings', (req, res) => {
     console.log("Server received login info");
