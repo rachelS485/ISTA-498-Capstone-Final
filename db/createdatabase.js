@@ -1,3 +1,4 @@
 //Tables created in POSTGRES
 
 //CREATE TABLE users (userid BIGSERIAL NOT NULL PRIMARY KEY, email VARCHAR(100) NOT NULL, password VARCHAR(100) NOT NULL, major VARCHAR(100) NOT NULL);
+
