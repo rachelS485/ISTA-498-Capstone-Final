@@ -147,17 +147,18 @@
 <div class="red-bar">
     <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
     <a href="settings.html" class="fas fa-cog settings-icon"></a>
-    <a href="help.html" class="help-link">Need help?</a>
+    <a href="instructions.html" class="help-link">Need help?</a>
 </div>
 
 <img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
 
 <h3 class="text-main"> Resource Links Page </h3>
 <p> 
-  <a class="square_page" style="margin-left: 40px;" href="interestsurvey.html">Interest Survey</a> | 
+<a class="square_page" style="margin-left: 40px;" href="mainweb.html"> Main Page </a> |
+<a class="square_page" href="fouryearplan.html">Four Year Plan</a> | 
+  <a class="square_page" href="interestsurvey.html">Interest Survey</a> | 
   <a class="square_page" href="courserecomendation.html">Course Recommendation</a> | 
-  <a class="square_page" href="fouryearplan.html">Four Year Plan</a> | 
-  <a class="square_page" href="mainweb.html"> Main Page </a>
+  <button class="square_page" id="logoutResouces" style="color: #dfdee7;">Logout</button> 
 </p>
 <div class="main">
     <h2>Resource Center Undergraduate Programs</h2>
@@ -235,5 +236,27 @@
       <p>Campus Accessibility</p>
     </div>
   </div>
+<script>
+document.getElementById("logoutResouces").onclick = function logoutUser(){
+    //Sending login info to server
+    let payload = {logout: "Logging out user"};
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/logout');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    console.log(payload);
+    console.log("Sending from Client");
+    xhr.send(JSON.stringify(payload));
+    xhr.onreadystatechange = function(){
+    if(xhr.readyState == 4 && xhr.status == 200){
+        console.log("Loggout User");
+        var response = JSON.parse(xhr.responseText);
+        console.log(response["test"]);
+        console.log("Worked!");
+        window.location.replace("login.html");
+    };
+    };
+  };
+
+</script>
 </body>
 </html>

@@ -83,8 +83,15 @@ app.post('/login', (req, res) => {
                     console.log(JSON.stringify(dataSend));
                     res.send(JSON.stringify(dataSend));
                     console.log("Login Sent!");
-                }else{
-                    var dataSend = {"login": "Login failed"};
+                }
+                if(resultUser && resultUser[0]['password'] != userpassword){
+                    var dataSend = {"login": "The password you have entered is incorrect!"};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("Login Sent!");
+                }
+                if(resultUser.length == 0 && resultUser[0]['password'] != userpassword){
+                    var dataSend = {"login": "The username and/or password is incorrect!"};
                     console.log(JSON.stringify(dataSend));
                     res.send(JSON.stringify(dataSend));
                     console.log("Login Sent!");
@@ -130,8 +137,8 @@ app.post('/createaccount', (req, res) => {
                     res.send(JSON.stringify(dataSend));
                     console.log("Account creation not successful!");
                 }else{
-                    let createAccountQuery = "INSERT INTO users (email, password, major) VALUES ($1, $2, $3)";
-                    client.query(createAccountQuery, [useremail, userpassword, major], (error, results)=>{
+                    let createAccountQuery = "INSERT INTO users (email, password, major, notify) VALUES ($1, $2, $3, $4)";
+                    client.query(createAccountQuery, [useremail, userpassword, major, true], (error, results)=>{
                         done();
                         if(error){
                             throw error;
@@ -139,10 +146,55 @@ app.post('/createaccount', (req, res) => {
                         let resultUser = results.rows;
                         console.log(resultUser);
                         if(resultUser){
-                            var dataSend = {"account": "Account creation success!"};
+                            var dataSend = {"account": "Account worked"};
                             console.log(JSON.stringify(dataSend));
                             res.send(JSON.stringify(dataSend));
                             console.log("Account creation is successful!");
+                        };
+                           
+                    });
+                };
+            });
+        };
+    });  
+});
+
+app.post('/forgotpassword', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    let useremail = req.body.useremail;
+    let userpassword = req.body.newpassword;
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM users WHERE email = '"+useremail+"'";
+            client.query(checkQuery, function(error, results){
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser);
+                if(resultUser.length == 0){
+                    console.log(useremail);
+                    var dataSend = {"passwordreset": "Your email does not exist!"};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("Password rest not successful!");
+                }else{
+                    let updatePasswordQuery = "UPDATE users SET password = $1 WHERE email = $2";
+                    client.query(updatePasswordQuery, [userpassword, useremail], (error, results)=>{
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"passwordreset": "Reset worked"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Password reset is successful!");
                         };
                            
                     });
@@ -161,18 +213,7 @@ app.get('/', (req, res) => {
         res.redirect('/login');
     }
 });
-
-//TODO
-//6-10pm
-//1. Get data take the course rec data and put into the table if the user id does not exist if it does then update. DONE
-//2. Adjust the course rec code to SELECT * from the table instead to pull alwasys on onload. DONE
-//3. Save the interest form results. Update or create depending on if the user is new DONE
-//4. Adjust the insterest form summary to be an onload that pulls everytime the page loads as well DONE
-
-//10-2am
-//5. pull data from 4 year plan
-//6. Update or Create in table
-//7. Use onload to always pull from table using SELECT *. 
+ 
 
 // Handling request  
 app.post("/dataformresultsforalgorithm", (req, res) => { 
@@ -377,6 +418,155 @@ app.post("/loadinterests", (req, res)=>{
 
             });
         }
+    });
+});
+
+app.post("/savefouryearplan", (req, res)=>{
+    console.log("Server received");
+    res.setHeader('Content-Type', 'text/html');
+    let savedPlan = req.body.fouryearplan;
+
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(checkQuery, function(error, result){
+                if(error){
+                    throw error;
+                };
+                let resultUser = result.rows;
+                console.log(resultUser);
+                if(resultUser.length > 0){
+                    let updateInterestsQuery = "UPDATE fouryearplan SET planstring = $1 WHERE userid = $2";
+                    client.query(updateInterestsQuery, [savedPlan, req.session.user[0]['userid']], (error, results)=>{
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"savedplan": "Update sucess!"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Update successful!");
+                        };  
+                    });
+                }else{
+                    let createInterstQuery = "INSERT INTO fouryearplan (userid, planstring) VALUES ($1, $2)";
+                    client.query(createInterstQuery, [req.session.user[0]['userid'], savedPlan], (error, results)=>{
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = results.rows;
+                        console.log(resultUser);
+                        if(resultUser){
+                            var dataSend = {"savedplan": "Added new interests!"};
+                            console.log(JSON.stringify(dataSend));
+                            res.send(JSON.stringify(dataSend));
+                            console.log("Plan added successfully!");
+                        };
+                        
+                    });
+                };
+
+            });
+        }
+    });
+
+});
+
+app.post("/updatfouryearplanui", (req, res)=>{
+    console.log("Server received");
+    res.setHeader('Content-Type', 'text/html');
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let checkQuery = "SELECT * FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(checkQuery, function(error, result){
+                if(error){
+                    throw error;
+                };
+                let resultUser = result.rows;
+                console.log(resultUser);
+                if(resultUser.length > 0){
+                    let interestsQuery = "SELECT planstring FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
+                    client.query(interestsQuery, function(error, result){
+                        done();
+                        if(error){
+                            throw error;
+                        };
+                        let resultUser = result.rows;
+                        console.log(resultUser);
+                        var dataSend = {"plansaved": resultUser[0]['planstring']};
+                        console.log(JSON.stringify(dataSend));
+                        res.send(JSON.stringify(dataSend));
+                        console.log("Four year plan sent!");
+                    });
+                }else{
+                    var dataSend = {"plansaved": 'No plan'};
+                    console.log(JSON.stringify(dataSend));
+                    res.send(JSON.stringify(dataSend));
+                    console.log("No four plan yet!");
+                };
+
+            });
+        }
+    });
+});
+//Settings
+app.post('/loadsettings', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let getaccountQuery = "SELECT email, password, major, notify FROM users WHERE userid = '"+req.session.user[0]['userid']+"'";
+            client.query(getaccountQuery, function(error, results){
+                done();
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser[0]);
+                var dataSend = {"email": resultUser[0]['email'], "password": resultUser[0]['password'], "major": resultUser[0]['major'], "notify": resultUser[0]['notify'] };
+                console.log(JSON.stringify(dataSend));
+                res.send(JSON.stringify(dataSend));
+                console.log("Account info sent!");
+        });
+
+        };
+    });
+});
+app.post('/updatesettings', (req, res) => {
+    console.log("Server received login info");
+    res.setHeader('Content-Type', 'text/html');
+    let updateEmail = req.body.email;
+    let updatePassword = req.body.password;
+    let updateMajor = req.body.major;
+    let updateNotify = req.body.notify;
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let updateaccountQuery = "UPDATE users SET email = $1, password = $2, major = $3, notify = $4 WHERE userid = $5";
+            client.query(updateaccountQuery, [updateEmail, updatePassword, updateMajor, updateNotify, req.session.user[0]['userid']], (error, results) =>{
+                done();
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser[0]);
+                var dataSend = {"updateAccount": "Completed"};
+                console.log(JSON.stringify(dataSend));
+                res.send(JSON.stringify(dataSend));
+                console.log("Account info updated!");
+            });
+
+        };
     });
 });
 

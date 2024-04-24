@@ -21,23 +21,33 @@
       position: relative;
     }
 
-    .settings-icon, .help-link {
-      position: absolute;
-      top: 50%;
+    .settings-icon{
+      position: relative;   
+      top: 25px;         
+      right: -60px;       
+      z-index: 999;      
       transform: translateY(-50%);
       font-size: 18px;
       color: white;
       cursor: pointer;
       text-decoration: none;
       padding: 10px;
-    }
-
-    .settings-icon {
-      right: 20px;
+      border-radius: 50%;   
     }
 
     .help-link {
-      right: 100px;
+      position: relative;   
+      top: 5px;
+      right: 50px;
+      font-size: 12px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+
+      white-space: nowrap; 
+
     }
 
     .beige-bar {
@@ -54,6 +64,14 @@
     .logo {
       height: 30px;
     }
+    #nameLogo {
+            position: relative;
+            left: -40px;
+            top: 8px;
+            width: 300px;
+            height: 35px;
+        
+        }
 
     .school-logo {
       margin-left: 20px;
@@ -75,6 +93,7 @@
       border-radius: 5px;
     }
 
+
     .square {
       display: flex;
       justify-content: center;
@@ -91,6 +110,27 @@
       margin: 0;
       color: black;
     }
+    #nameLogo {
+      position: relative;
+            left: 50px;
+            top: 8px;
+            width: 300px;
+            height: 35px;
+        
+        }
+
+
+        #top {
+            position: relative;
+            background-color: #8B0015;
+            color: white;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
 
     .text-bar {
       position: absolute;
@@ -105,23 +145,45 @@
       color: #333;
       margin-bottom: 10px;
     }
+    .square_page{
+      background-color: #001C48;
+      border-radius: 5px;
+      font-size: 11px;
+      position: absolute;  
+      top: 22px;
+      right: 145px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-  <div class="red-bar">
-    <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo" class="logo">
+  <!-- <div class="red-bar">
+    <img  id="nameLogo" src="ua_wordmark_line_logo_white_rgb.min.svg" alt="UA Logo">
     <a href="settings.html" class="fas fa-cog settings-icon"></a>
-    <a href="help.html" class="help-link">Need help?</a>
-  </div>
+    <a href="instructions.html" class="help-link">Need help?</a>
+  </div> -->
+
+
+  <div id="top">
+    <img id="nameLogo" src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona">
+    <div >
+      <button class="square_page" id="logoutMain" style="color: #dfdee7;">Logout</button>
+      <a href="settings.html" class="fas fa-cog settings-icon"></a>
+      <a href="instructions.html" class="help-link">Need help?</a>
+    </div>
+</div>
+
+
 
   <img src="SchoolOfInformation.png" alt="School of Information Logo" class="school-logo">
 
   <br>
   <br>
-  <p class="text-main"> 
-    <button type="button" style="color: #1c144a;" id="logoutMain">Logout</button> | 
-    <button type="button" style="color: #1c144a;" id="saveMain">Save</button> | 
-  </p>
+  <h2 style="text-align: center;">Welcome to UA Course Compass</h2>
+  <!-- <p> 
+    <button class="square_page" id="logoutMain" style="margin-left: 40px; color: #dfdee7;">Logout</button>
+  </p> -->
 
   <div class="main-navigation">
     <div class="square"> <a href="fouryearplan.html" style="color: white; text-decoration: none;"> Create a four-year plan </a></div>
