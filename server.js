@@ -130,7 +130,7 @@ app.post('/login', (req, res) => {
         if(error){
             console.log(error);
         }else{
-            let loginquery = "SELECT * FROM users WHERE email = '"+useremail+"'";
+            let loginquery = "SELECT * FROM users WHERE email = '"+ encrypt(useremail)+"'";
 
             
 
@@ -145,13 +145,15 @@ app.post('/login', (req, res) => {
                 let resultUser = results.rows;
                 console.log(resultUser[0]);
 
+                let email = decrypt(resultUser[0]['email'])
                 let password = decrypt(resultUser[0]['password'])
+                let major = decrypt(resultUser[0]['major'])
             
                 if(resultUser && password == userpassword){
                     req.session.user = resultUser;
-                    app.locals.username = resultUser[0]['email'];
+                    app.locals.username = email;
                     app.locals.login = true;
-                    console.log(resultUser[0]['email']);
+                    console.log(email);
                     var dataSend = {"login": "Login worked"};
                     console.log(JSON.stringify(dataSend));
                     res.send(JSON.stringify(dataSend));
@@ -205,13 +207,19 @@ app.post('/createaccount', (req, res) => {
         if(error){
             console.log(error);
         }else{
-            let checkQuery = "SELECT * FROM users WHERE email = '"+useremail+"'";
+            let checkQuery = "SELECT * FROM users WHERE email = '"+ encrypt(useremail)+"'";
             client.query(checkQuery, function(error, results){
                 if(error){
                     throw error;
                 };
                 let resultUser = results.rows;
                 console.log(resultUser);
+
+                let email = decrypt(resultUser[0]['email'])
+                let password = decrypt(resultUser[0]['password'])
+                let usermajor = decrypt(resultUser[0]['major'])
+
+
                 if(resultUser.length > 0){
                     console.log(useremail);
                     var dataSend = {"account": "User email already exists!"};
@@ -264,13 +272,19 @@ app.post('/forgotpassword', (req, res) => {
         if(error){
             console.log(error);
         }else{
-            let checkQuery = "SELECT * FROM users WHERE email = '"+useremail+"'";
+            let checkQuery = "SELECT * FROM users WHERE email = '"+ encrypt(useremail)+"'";
             client.query(checkQuery, function(error, results){
                 if(error){
                     throw error;
                 };
                 let resultUser = results.rows;
                 console.log(resultUser);
+
+                let email = decrypt(resultUser[0]['email'])
+                let password = decrypt(resultUser[0]['password'])
+                let usermajor = decrypt(resultUser[0]['major'])
+
+
                 if(resultUser.length == 0){
                     console.log(useremail);
                     var dataSend = {"passwordreset": "Your email does not exist!"};
@@ -353,6 +367,9 @@ app.post("/dataformresultsforalgorithm", (req, res) => {
                     };
                     let resultUser = result.rows;
                     console.log(resultUser);
+
+                    let courserecstring = decrypt(resultUser[0]['courserecstring']);
+
                     if(resultUser.length > 0){
                         let updatecourseQuery = "UPDATE courserecs SET courserecstring = $1 WHERE userid = $2";
 
@@ -412,6 +429,8 @@ app.post("/updatecourseui", (req, res) => {
                 };
                 let resultUser = result.rows;
                 console.log(resultUser);
+
+
                 if(resultUser.length > 0){
                     let coursesQuery = "SELECT courserecstring FROM courserecs WHERE userid = '"+req.session.user[0]['userid']+"'";
                     client.query(coursesQuery, function(error, result){
@@ -419,9 +438,13 @@ app.post("/updatecourseui", (req, res) => {
                         if(error){
                             throw error;
                         };
+
+                        let courserecstringToSend = decrypt(resultUser[0]['courserecstring']);
+
+
                         let resultUser = result.rows;
                         console.log(resultUser);
-                        var dataSend = {"coursematches": resultUser[0]['courserecstring']};
+                        var dataSend = {"coursematches": courserecstringToSend};
                         console.log(JSON.stringify(dataSend));
                         res.send(JSON.stringify(dataSend));
                         console.log("Courses sent!");
@@ -464,6 +487,10 @@ app.post("/saveinterstformsummary", (req, res)=>{
                 };
                 let resultUser = result.rows;
                 console.log(resultUser);
+
+                let interstsumarystring = decrypt(resultUser[0]['interstsumarystring']);
+
+
                 if(resultUser.length > 0){
                     let updateInterestsQuery = "UPDATE interestresults SET interstsumarystring = $1 WHERE userid = $2";
 
@@ -524,6 +551,10 @@ app.post("/loadinterests", (req, res)=>{
                 };
                 let resultUser = result.rows;
                 console.log(resultUser);
+
+                
+
+
                 if(resultUser.length > 0){
                     let interestsQuery = "SELECT interstsumarystring FROM interestresults WHERE userid = '"+req.session.user[0]['userid']+"'";
                     client.query(interestsQuery, function(error, result){
@@ -533,7 +564,11 @@ app.post("/loadinterests", (req, res)=>{
                         };
                         let resultUser = result.rows;
                         console.log(resultUser);
-                        var dataSend = {"insterestsaved": resultUser[0]['interstsumarystring']};
+
+                        let interstsumarystringToSend = decrypt(resultUser[0]['interstsumarystring']);
+
+
+                        var dataSend = {"insterestsaved": interstsumarystringToSend};
                         console.log(JSON.stringify(dataSend));
                         res.send(JSON.stringify(dataSend));
                         console.log("Intersts sent!");
@@ -575,6 +610,9 @@ app.post("/savefouryearplan", (req, res)=>{
                 };
                 let resultUser = result.rows;
                 console.log(resultUser);
+
+                let planstring = decrypt(resultUser[0]['planstring'])
+
                 if(resultUser.length > 0){
                     let updateInterestsQuery = "UPDATE fouryearplan SET planstring = $1 WHERE userid = $2";
 
@@ -635,6 +673,9 @@ app.post("/updatfouryearplanui", (req, res)=>{
                 };
                 let resultUser = result.rows;
                 console.log(resultUser);
+
+                
+
                 if(resultUser.length > 0){
                     let interestsQuery = "SELECT planstring FROM fouryearplan WHERE userid = '"+req.session.user[0]['userid']+"'";
                     client.query(interestsQuery, function(error, result){
@@ -642,9 +683,12 @@ app.post("/updatfouryearplanui", (req, res)=>{
                         if(error){
                             throw error;
                         };
+
+                        let planstringToSend = decrypt(resultUser[0]['planstring'])
+
                         let resultUser = result.rows;
                         console.log(resultUser);
-                        var dataSend = {"plansaved": resultUser[0]['planstring']};
+                        var dataSend = {"plansaved": planstringToSend};
                         console.log(JSON.stringify(dataSend));
                         res.send(JSON.stringify(dataSend));
                         console.log("Four year plan sent!");
@@ -674,9 +718,15 @@ app.post('/loadsettings', (req, res) => {
                 if(error){
                     throw error;
                 };
+
+                let email = decrypt(resultUser[0]['email'])
+                let password = decrypt(resultUser[0]['password'])
+                let major = decrypt(resultUser[0]['major'])
+
+
                 let resultUser = results.rows;
                 console.log(resultUser[0]);
-                var dataSend = {"email": resultUser[0]['email'], "password": resultUser[0]['password'], "major": resultUser[0]['major'], "notify": resultUser[0]['notify'] };
+                var dataSend = {"email": email, "password": password, "major": major, "notify": resultUser[0]['notify'] };
                 console.log(JSON.stringify(dataSend));
                 res.send(JSON.stringify(dataSend));
                 console.log("Account info sent!");
