@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 # Email configuration
 email_sender = 'kargichauhan2302@gmail.com'
 email_password = 'Kargi@2302'
-smtp_server = 'smtp.example.com'
-port = 587  
+smtp_server = 'smtp.gmail.com'
+port = 465  
 
 # Email content
 subject = 'Academic Deadline Reminder'
@@ -47,12 +47,12 @@ def schedule_emails():
         event_body = body_template.format(event, date_str)
 
         # Schedule the email
-        schedule.every().day.at(reminder_date.strftime('11:18')).do(send_email, 
+        schedule.every().day.at(reminder_date.strftime('23:47')).do(send_email, 
             recipient='kargichauhan2302@gmail.com', 
             subject=subject, 
             body=event_body)
 
-        print(f"Scheduled an email for {event} on {reminder_date.strftime('%Y-%m-%d 11:18')}")
+        print(f"Scheduled an email for {event} on {reminder_date.strftime('%Y-%m-%d 23:47')}")
 
 # Run the scheduler
 schedule_emails()
