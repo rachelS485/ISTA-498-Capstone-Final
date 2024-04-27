@@ -15,22 +15,15 @@ document.getElementById("loginButton").onclick = function loginUser(){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/login');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.log(payload);
-    console.log("Sending from Client");
     xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
-        console.log("Loaded Login");
         var response = JSON.parse(xhr.responseText);
         if(response["login"] == "Login worked"){
-            console.log(response["login"]);
-            console.log("Worked!");
             window.location.replace("mainweb.html");
             loginStatus1.style.display = "none";
             loginStatus2.style.display = "none";
         }else{
-            console.log(response["login"]);
-            console.log("Failed!");
             if(response["login"] == "The password you have entered is incorrect!"){
                 loginStatus1.style.display = "block";
             } else{
@@ -62,21 +55,14 @@ document.getElementById("createAccountButton").onclick = function createUser(){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/createaccount');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.log(payload);
-    console.log("Sending from Client");
     xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
-            console.log("Loaded Acount");
             var response = JSON.parse(xhr.responseText);
             if(response["account"] == "Account worked"){
-                console.log(response["account"]);
-                console.log("Worked!");
                 window.location.replace("login.html");
                 accountStatus.style.display = "none";
             }else{
-                console.log(response["account"]);
-                console.log("Failed!");
                 accountStatus.style.display = "block";
                 setTimeout(function(){
                     window.location.replace("login.html");

@@ -264,7 +264,7 @@ a{
 <div id="top">
   <img id="nameLogo" src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona">
   <div >
-    <button class="square_page2" id="logoutMain" style="color: #dfdee7;">Logout</button>
+    <button class="square_page2" id="logout" style="color: #dfdee7;">Logout</button>
     <a href="settings.html" class="fas fa-cog settings-icon"></a>
     <a href="instructions.html" class="help-link">Need help?</a>
   </div>
@@ -282,7 +282,6 @@ a{
   <a class="square_page" style="color: #dfdee7;" href="interestsurvey.html">Interest survey</a> | 
   <a class="square_page" style="color: #dfdee7;" href="courserecomendation.html">Course recommendation</a> | 
   <a class="square_page" style="color: #dfdee7;" href="resourcelinks.html">Resources Link</a>   |
-  <button class="square_page" id="logout" style="color: #dfdee7;">Logout</button>   |
   <button class="square_page" id="save" style="color: #dfdee7;"> Save </button>
 </p>
 <br>
@@ -667,17 +666,14 @@ a{
       console.log("In Loaded Page");
       let payload = {message: "Getting Data to Update UI."};
       let xhr = new XMLHttpRequest();
-      xhr.open('POST', '/updatfouryearplanui');
+      xhr.open('POST', '/updatefouryearplanui');
       xhr.setRequestHeader('Content-Type', 'application/json');
-      console.log(payload);
       console.log("Sending from Client");
       xhr.send(JSON.stringify(payload));
       xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
           console.log("Loaded four year plan to client");
           var response = JSON.parse(xhr.responseText);
-          console.log(response["plansaved"]);
-          console.log("Worked!");
           if(response["plansaved"] != 'No plan'){
             resultArray = response["plansaved"].split(" : ");
             sem1 = new Set(resultArray[0].split("*"));
@@ -751,7 +747,7 @@ a{
       }
       resultBox.innerHTML += "<div><span>" + additionalItemValue + "</span><span class='remove-item' onclick='removeItem(this.parentNode)'> - </span></div>";
       additionalItemInput.value = "";
-      savePlan();
+      //savePlan();
     }
   }
 
@@ -789,7 +785,7 @@ a{
 
     }
     item.parentNode.removeChild(item);
-    savePlan();
+    //savePlan();
   }
   document.getElementById("logout").onclick = function logoutUser(){
     //Sending login info to server
@@ -798,15 +794,10 @@ a{
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/logout');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.log(payload);
-    console.log("Sending from Client");
     xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
-        console.log("Loggout User");
         var response = JSON.parse(xhr.responseText);
-        console.log(response["test"]);
-        console.log("Worked!");
         window.location.replace("login.html");
     };
     };
@@ -827,15 +818,10 @@ a{
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/savefouryearplan');
     xhr.setRequestHeader('Content-Type', 'application/json');
-      console.log(payload);
-      console.log("Sending from Client");
       xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
       if(xhr.readyState == 4 && xhr.status == 200){
-        console.log("Plan was saved!");
         var response = JSON.parse(xhr.responseText);
-        console.log(response["savedplan"]);
-        console.log("Worked!");
       };
     };
   }
@@ -856,15 +842,10 @@ a{
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/savefouryearplan');
     xhr.setRequestHeader('Content-Type', 'application/json');
-      console.log(payload);
-      console.log("Sending from Client");
       xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
       if(xhr.readyState == 4 && xhr.status == 200){
-        console.log("Plan was saved!");
         var response = JSON.parse(xhr.responseText);
-        console.log(response["savedplan"]);
-        console.log("Worked!");
       };
     };
   }

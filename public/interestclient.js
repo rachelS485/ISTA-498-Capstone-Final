@@ -4,15 +4,10 @@ window.onload = function(e){
   	let xhr = new XMLHttpRequest();
   	xhr.open('POST', '/loadinterests');
  	 xhr.setRequestHeader('Content-Type', 'application/json');
-  	console.log(payload);
-	console.log("Sending from Client");
   	xhr.send(JSON.stringify(payload));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("Intersts were received!");
 			var response = JSON.parse(xhr.responseText);
-			console.log(response["insterestsaved"]);
-			console.log("Worked!");
 			if(response["insterestsaved"] != "No intersts"){
 				let updateDiv = document.getElementById("formResult");
 				updateDiv.innerHTML = response["insterestsaved"];
@@ -151,15 +146,10 @@ document.getElementById("submitButton2").onclick = function getDataCourses(){
   	let xhr = new XMLHttpRequest();
   	xhr.open('POST', '/dataformresultsforalgorithm');
  	 xhr.setRequestHeader('Content-Type', 'application/json');
-  	console.log(payload);
-	  console.log("Sending from Client");
   	xhr.send(JSON.stringify(payload));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("Loaded matched courses to client");
 			var response = JSON.parse(xhr.responseText);
-			console.log(response["courses"]);
-			console.log("Worked!");
 			alert("New Course Recomendations Available");
 		};
 	};
@@ -199,7 +189,6 @@ document.getElementById("submitButton3").onclick = function getImmersiveCourses(
 	if(document.getElementById("I3G").checked){
 		insterestImmerseString += document.getElementById("I3G").value;
 	}
-	console.log(insterestImmerseString);
 	
 	//Question 9 Arts
 	if(document.getElementById("I9A").checked){
@@ -225,7 +214,6 @@ document.getElementById("submitButton3").onclick = function getImmersiveCourses(
 	if(document.getElementById("I9F").checked){
 		interestArtString += document.getElementById("I9F").value;
 	}
-	console.log(interestArtString);
 
 	//Question 10 Society
 	if(document.getElementById("I10A").checked){
@@ -263,22 +251,16 @@ document.getElementById("submitButton3").onclick = function getImmersiveCourses(
 	if(document.getElementById("I10I").checked){
 		interestSocietyString += document.getElementById("I10I").value;
 	}
-	console.log(interestSocietyString);
 
 	//Sending and Receiving to Server
 	let payload = {type: "immersive", data: insterestImmerseString, arts: interestArtString, society: interestSocietyString};
   	let xhr = new XMLHttpRequest();
   	xhr.open('POST', '/dataformresultsforalgorithm');
  	 xhr.setRequestHeader('Content-Type', 'application/json');
-  	console.log(payload);
-	  console.log("Sending from Client");
   	xhr.send(JSON.stringify(payload));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("Loaded matched courses to client");
 			var response = JSON.parse(xhr.responseText);
-			console.log(response["courses"]);
-			console.log("Worked!");
 			alert("New Course Recomendations Available");
 		};
 	};
@@ -575,15 +557,10 @@ function saveDataResponse(){
   	let xhr = new XMLHttpRequest();
   	xhr.open('POST', '/saveinterstformsummary');
  	 xhr.setRequestHeader('Content-Type', 'application/json');
-  	console.log(payload);
-	  console.log("Sending from Client");
   	xhr.send(JSON.stringify(payload));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("Intersts were saved!");
 			var response = JSON.parse(xhr.responseText);
-			console.log(response["interests"]);
-			console.log("Worked!");
 		};
 	};
 	
@@ -870,15 +847,10 @@ function saveImmersiveResponse(){
   	let xhr = new XMLHttpRequest();
   	xhr.open('POST', '/saveinterstformsummary');
  	 xhr.setRequestHeader('Content-Type', 'application/json');
-  	console.log(payload);
-	  console.log("Sending from Client");
   	xhr.send(JSON.stringify(payload));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("Intersts were saved!");
 			var response = JSON.parse(xhr.responseText);
-			console.log(response["interests"]);
-			console.log("Worked!");
 		};
 	};
 };
@@ -889,15 +861,10 @@ document.getElementById("logoutInterest").onclick = function logoutUser(){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/logout');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.log(payload);
-    console.log("Sending from Client");
     xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
-        console.log("Loggout User");
         var response = JSON.parse(xhr.responseText);
-        console.log(response["test"]);
-        console.log("Worked!");
         window.location.replace("login.html");
     };
     };

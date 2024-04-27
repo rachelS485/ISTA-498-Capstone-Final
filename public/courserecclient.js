@@ -3,20 +3,14 @@ pulling from the database and what is updated there.
 */
 
 window.onload = function(e){
-    console.log("In Loaded Page");
     let payload = {message: "Getting Data to Update UI."};
   	let xhr = new XMLHttpRequest();
   	xhr.open('POST', '/updatecourseui');
  	 xhr.setRequestHeader('Content-Type', 'application/json');
-  	console.log(payload);
-	  console.log("Sending from Client");
   	xhr.send(JSON.stringify(payload));
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log("Loaded matched courses to client");
 			var response = JSON.parse(xhr.responseText);
-			console.log(response["coursematches"]);
-			console.log("Worked!");
 			if(response["coursematches"] != 'No courses'){
 				var split_response = response["coursematches"].split("::");
 				var data_courses = split_response[0].split(":");
@@ -58,15 +52,10 @@ document.getElementById("logoutCourseRec").onclick = function logoutUser(){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/logout');
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.log(payload);
-    console.log("Sending from Client");
     xhr.send(JSON.stringify(payload));
     xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
-        console.log("Loggout User");
         var response = JSON.parse(xhr.responseText);
-        console.log(response["test"]);
-        console.log("Worked!");
         window.location.replace("login.html");
     };
     };
