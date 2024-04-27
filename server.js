@@ -182,7 +182,6 @@ app.post('/login', (req, res) => {
 app.post('/logout', (req, res) => {
     console.log("Log out");
     req.session.user = null;
-    currentuser = null;
     res.clearCookie("user_sid");
     app.locals.login = false;
     var dataSend = {"test": "Logout worked"};
@@ -784,41 +783,35 @@ app.post('/updatesettings', (req, res) => {
 
 function sendEmailReminders(){
     console.log("In Cron function");
-    if (currentuser){
-        console.log("User is logged in.");
-        pool.connect(function (error, client, done){
-            if(error){
-                console.log(error);
-            }else{
-                let getaccountQuery = "SELECT email FROM users WHERE userid = '"+currentuser+"'";
-                client.query(getaccountQuery, function(error, results){
-                    done();
-                    if(error){
-                        throw error;
-                    };
-                    let resultUser = results.rows;
-                    console.log(resultUser[0]);
-                    for (let i = 0; i < resultUser.length; i++) {
-                        let user_email = resultUser[i]['email'];
-                        const spawner = require('child_process').spawn;
-        
-                        console.log('About to send data to email Python file. ');
-                        
-                        const python_process = spawner('python', ['.\\email_reminders.py', user_email]);
-                        
-                        python_process.stdout.on('data', (data) => {
-                            console.log('Data received from python:', data.toString());
-        
-                        });
-                    }
-            });
+    pool.connect(function (error, client, done){
+        if(error){
+            console.log(error);
+        }else{
+            let getaccountQuery = "SELECT email FROM users";
+            client.query(getaccountQuery, function(error, results){
+                done();
+                if(error){
+                    throw error;
+                };
+                let resultUser = results.rows;
+                console.log(resultUser[0]);
+                for (let i = 0; i < resultUser.length; i++) {
+                    let user_email = decrypt(resultUser[i]['email']);
+                    const spawner = require('child_process').spawn;
     
-            };
+                    console.log('About to send data to email Python file. ');
+                    
+                    const python_process = spawner('python', ['.\\email_reminders.py', user_email]);
+                    
+                    python_process.stdout.on('data', (data) => {
+                        console.log('Data received from python:', data.toString());
+    
+                    });
+                }
         });
 
-    }else{
-        console.log("User is not logged in");
-    }
+        };
+    });
 
 }
 //Automatic Emails
