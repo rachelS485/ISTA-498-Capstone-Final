@@ -21,12 +21,14 @@ body_template = "Hello, just a reminder that {} is on {}. Please take necessary 
 # Academic dates
 academic_dates = {
     '08/26/2024':'First day of Fall classes and other activities',
-    '04/26/2024': 'Last day to withdraw, change to/from audit, or for instructors to drop students',
     '09/01/2024':'Registration opens soon, stay updated with your specific day',
     '09/02/2024':'Last day for class additions and changes via UAccess',
     '09/08/2024':'Last day to drop without a W, and to change credit/audit status',
     '09/22/2024': 'Last day for department staff to add or drop',
-    '11/03/2024': 'Last day to file for Grade Replacement Opportunity'
+    '11/03/2024': 'Last day to file for Grade Replacement Opportunity',
+    '11/03/2024': 'Last day to withdraw, change to/from audit, or for instructors to drop students',
+    '12/11/2024': 'Last day of class--no registration changes can be made after the last day of class',
+    '12/13/2024': 'Final Exams begin'
 }
 
 def send_email(recipient, subject, body):

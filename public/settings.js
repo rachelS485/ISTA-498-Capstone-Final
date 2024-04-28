@@ -13,7 +13,7 @@ window.onload = function(e){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			var response = JSON.parse(xhr.responseText);
 			email.innerHTML = response["email"];
-            password.innerHTML = response["password"];
+            password.innerHTML = "Your password is hashed for security"
             major.innerHTML = response["major"];
             notify.innerHTML = response["notify"];
 		};

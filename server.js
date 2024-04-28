@@ -161,7 +161,7 @@ app.post('/forgotpassword', (req, res) => {
                     res.send(JSON.stringify(dataSend));
                 }else{
                     let updatePasswordQuery = "UPDATE users SET password = $1 WHERE email = $2";
-                    client.query(updatePasswordQuery, [bycrypt.hashSync(userpassword), useremail], (error, results)=>{
+                    client.query(updatePasswordQuery, [bycrypt.hashSync(userpassword, 10), useremail], (error, results)=>{
                         done();
                         if(error){
                             throw error;
@@ -459,7 +459,7 @@ app.post('/loadsettings', (req, res) => {
                     throw error;
                 };
                 let resultUser = results.rows;
-                var dataSend = {"email": resultUser[0]['email'], "password (encrypted)": resultUser[0]['password'], "major": resultUser[0]['major'], "notify": resultUser[0]['notify'] };
+                var dataSend = {"email": resultUser[0]['email'], "password": resultUser[0]['password'], "major": resultUser[0]['major'], "notify": resultUser[0]['notify'] };
                 res.send(JSON.stringify(dataSend));
         });
 
@@ -477,7 +477,7 @@ app.post('/updatesettings', (req, res) => {
             console.log(error);
         }else{
             let updateaccountQuery = "UPDATE users SET email = $1, password = $2, major = $3, notify = $4 WHERE userid = $5";
-            client.query(updateaccountQuery, [updateEmail, bycrypt.hashSync(updatePassword), updateMajor, updateNotify, req.session.user[0]['userid']], (error, results) =>{
+            client.query(updateaccountQuery, [updateEmail, bycrypt.hashSync(updatePassword, 10), updateMajor, updateNotify, req.session.user[0]['userid']], (error, results) =>{
                 done();
                 if(error){
                     throw error;
