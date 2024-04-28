@@ -64,12 +64,13 @@
             right: 50px;
             top: 127px;
             text-align: center;
-            background-color: rgba(212, 212, 212, 0.3);
-            border: 2px solid rgba(212, 212, 212, 0.3);
+            background-color:#001C48;
             border-radius: 10%;
             display: inline-flex;
-            height: 30px;
-            width: 68px;
+            height: 20px;
+            color: white;
+            width: 55px;
+            font-size: 12px;
             cursor: pointer;
         }
 
@@ -175,9 +176,15 @@
             line-height: 4px;
             padding-right: 10px;
             padding-left: 10px;
+            color: #001C48;
+            text-decoration: none;
             
         }
 
+        a:visited {
+      color: inherit; 
+
+    }
         .tabButtons:before, .logoutButton:before {
             content: '';
             position: absolute;
@@ -206,6 +213,17 @@
             line-height: 1.7;
         }
 
+        .square_page2{
+            background-color: #001C48;
+            border-radius: 5px;
+            font-size: 10px;
+            position: absolute;  
+            top: 30px;
+            padding: 3px;
+            left: -20px;
+            text-decoration: none;
+        }
+
     </style>
 
 </head>
@@ -215,15 +233,19 @@
     <div id='top' >
         <img id='nameLogo' src='ua_wordmark_line_logo_white_rgb.min.svg' alt='University of Arizona'>
 
+
+
     </div>
 
     <img id='logoTop' src='SchoolOfInformation.png' alt='School of Information'>
 
 
     <div id="headlineText">
-        <h2 style="margin: 0;  padding: 0;">
+        <h2 style="margin: 0;  padding: 0; color: #001C48;">
             Account Settings
         </h2>
+        <a class="square_page2" style="margin-bottom: 10px; margin-left: 20px; color: #eeeeee;" href="mainweb.html"> Main Page </a>
+
     </div>
 
     <div class='logoutButton' id="settingsLogout" style="margin: 0; padding: 0;">
@@ -308,7 +330,7 @@
         <p class='footerText'>1103 E. 2nd St., Rm. 409 (Harvill Building)</p>
         <p class='footerText'>P.O. Box 210076</p>
         <p class='footerText'>Tucson, Arizona 85721</p>
-        <p class='footerText'>Contact Us | <a href=“mailto:si_info@arizona.edu”>si_info@arizona.edu</a> | 520-621-3565</p>
+        <p class='footerText'>Contact Us | <a style="color: #001C48;" href=“mailto:si_info@arizona.edu”>si_info@arizona.edu</a> | 520-621-3565</p>
         <p class='footerText'>A member of the iSchools consortium.</p>
         <p class='footerText'>Emergency Information</p>
         <p class='footerText'>UAlert</p>
