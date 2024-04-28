@@ -498,7 +498,7 @@ function saveDataResponse(){
 	let updateString = "";
 	updateString += "<br>";
 	updateString += "<br>";
-	updateString += "<h2 class='question'> Interst Result Summary</h2>";
+	updateString += "<h2 class='question'> Interest Result Summary</h2>";
 	updateString += "<br>";
 	updateString += "<h4 class='question'> Pick an emphasis:</h4>";
 	updateString += "<ul class='question'>";
@@ -788,7 +788,7 @@ function saveImmersiveResponse(){
 	let updateString = "";
 	updateString += "<br>"
 	updateString += "<br>"
-	updateString += "<h2 class='question'> Interst Result Summary</h2>";
+	updateString += "<h2 class='question'> Interest Result Summary</h2>";
 	updateString += "<br>";
 	updateString += "<h4 class='question'> Pick an emphasis:</h4>";
 	updateString += "<ul class='question'>";

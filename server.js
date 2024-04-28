@@ -527,7 +527,7 @@ function sendEmailReminders(){
 
 //Automatic Emails
 
-const task = cron.schedule("*/120 * * * *", ()=> {
+const task = cron.schedule("*0 0 0,4 1,15 * ? *", ()=> {
     console.log("In CRON expression");
     sendEmailReminders();
     console.log("Executing...");
