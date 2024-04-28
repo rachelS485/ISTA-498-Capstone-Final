@@ -145,49 +145,32 @@ a {
 .square_page2{
       background-color: #001C48;
       border-radius: 5px;
-      font-size: 11px;
+      font-size: 10px;
       position: absolute;  
-      top: 14px;
-      right: 130px;
+      top: 19px;
+      right: 111px;
       text-decoration: none;
       border-radius: 5px;
     }
 
-
-    .settings-icon, .help-link {
-    position: absolute;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    padding: 10px;
-}
-
-.settings-icon {
-    right: 90px;
-    margin-top:-15px;
-}
+    .settings-icon{
+      position: relative;   
+      top: -10px;         
+      left: 1390px;       
+      z-index: 999;      
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 50%;   
+    }
 
 .help-link {
-    margin-right: -90px;
-    top: 50%;
-
-}
-
-a:visited {
-      color: inherit; 
-
-    }
-    a{
-      text-decoration: none;
-    }
-
-
-    .help-link {
       position: relative;   
-      top: -2px;
-      right: 30px;
+      top: -32px;
+      left: 1280px;       
       font-size: 12px;
       color: white;
       cursor: pointer;
@@ -199,17 +182,28 @@ a:visited {
 
     }
 
+a:visited {
+      color: inherit; 
+
+    }
+    a{
+      text-decoration: none;
+      
+    }
+
+
+
 
 </style>
 </head>
 <body>
 
-<div id="top" style="background-color: #a70d26; color: white; width: 100%; height: 50px;">
+<div id="top" style="background-color: #8B0015; color: white; width: 100%; height: 50px;">
 <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona" style="width: 300px; height: 35px; position: relative; left: 50px; top: 8px;">
 <div >
   <button class="square_page2" style="color: #dfdee7;">Logout</button>
   <a href="settings.html" class="fas fa-cog settings-icon"></a>
-  <a href="instructions.html" class="help-link">Need help?</a>
+  <a href="instructions.html"  class="help-link">Need help?</a>
 </div>
 </div>
 
@@ -245,7 +239,7 @@ Course Recommendation
 <div style="background-color: #ef4057da;" class="core-area">
 <div class="core-title">Bachelors of Science in Information Science Major Courses <br>Core Courses (15 Units)</div>
 <ul class="course-list">
-  <li><a href="https://catalog.arizona.edu/courses/0354901">ISTA 100 - Great Ideas of the Information Age</a></li>
+  <li><a style="color: rgba(206, 205, 205, 0.712);" href="https://catalog.arizona.edu/courses/0354901">ISTA 100 - Great Ideas of the Information Age</a></li>
   <li><a href="https://catalog.arizona.edu/courses/0356451">ISTA 116 - Statistical Foundations for the Information Age</a></li>
   <li><a href="https://catalog.arizona.edu/courses/0354911">ISTA 130 - Computational Thinking and Doing</a></li>
   <li><a href="https://catalog.arizona.edu/courses/0364381">ISTA 131 - Dealing with Data</a></li>
@@ -255,8 +249,8 @@ Course Recommendation
 
 <div style="background-color: #AB0520;" class="emphasis-area">
 <div class="emphasis-title">Emphasis Area: Data Science (15 Units)</div>
-<ul class="course-list">
-  <li><a href="https://catalog.arizona.edu/courses/0389531">ESOC 414 - Computational Social Science</a></li>
+<ul style="color: rgba(206, 205, 205, 0.712);" class="course-list">
+  <li><a  href="https://catalog.arizona.edu/courses/0389531">ESOC 414 - Computational Social Science</a></li>
   <li><a href="https://catalog.arizona.edu/courses/0376001">ISTA 311 - Foundation of Information and Inference</a></li>
   <li><a href="https://catalog.arizona.edu/courses/0415471">ISTA 320 - Applied Data Visualization</a></li>
   <li><a href="https://catalog.arizona.edu/courses/0368301">ISTA 321 - Data Mining and Discovery</a></li>
@@ -288,9 +282,9 @@ Course Recommendation
     <li><a href="https://catalog.arizona.edu/courses/0400211">GAME 425 - Algorithms for Games</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0357071">GAME 451 - Game Development</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0380141">ISTA 303 - Introduction to Creative Coding</a></li>
-    <li><a href="https://catalog.arizona.edu/courses/0415471">ISTA 320 - Applied Data Visualization</a></li>
+    <li><a style="color: rgba(206, 205, 205, 0.712);" href="https://catalog.arizona.edu/courses/0415471">ISTA 320 - Applied Data Visualization</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0406241">ISTA 330 - Advanced Web Design</a></li>
-    <li><a href="https://catalog.arizona.edu/courses/0380541">ISTA 350 - Programming for Informatics Applications</a></li>
+    <li><a style="color: rgba(206, 205, 205, 0.712);" href="https://catalog.arizona.edu/courses/0380541">ISTA 350 - Programming for Informatics Applications</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0380351">ISTA 403 - Creative Coding</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0380111">ISTA 416 - Introduction to Human Computer Interaction</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0400221">ISTA 424 - Virtual Reality</a></li>
@@ -333,7 +327,7 @@ Course Recommendation
     <li><a href="https://catalog.arizona.edu/courses/0387831">ESOC 318 - Disruptive Technologies</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0411581">ESOC 319 - Instructional Technologies</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0381331">ESOC 330 - Digital Dilemmas - Privacy, Property and Access</a></li>
-    <li><a href="https://catalog.arizona.edu/courses/0389801">ESOC 477 - Information Security</a></li>
+    <li><a style="color: rgba(206, 205, 205, 0.712);" href="https://catalog.arizona.edu/courses/0389801">ESOC 477 - Information Security</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0399841">ESOC 478 - Science Information and its Presentation</a></li>
     <li><a href="https://catalog.arizona.edu/courses/0387261">ESOC 495 - Special Topics in a Digital and Big Data World</a></li>
 </ul>
@@ -367,16 +361,16 @@ Course Recommendation
 <img id="logo2" src="SchoolOfInformation.png" alt="School of Information">
 <div id="bottom_text">
   <p><b>School of Information</b></p>
-  <p><b><a style="text-decoration: none;" href="https://www.google.com/maps/place/1103+E+2nd+St,+Tucson,+AZ+85719/@32.2343702,-110.9569788,17z/data=!3m1!4b1!4m6!3m5!1s0x86d67106f7e51223:0x6b78f9e48ae1775c!8m2!3d32.2343702!4d-110.9544039!16s%2Fg%2F11cslx4d03?entry=tts">1103 E. 2nd St.</a>, Rm. 409</b> (Harvill Building)</p>
+  <p><b><a style="text-decoration: none;  color: #001C48;" href="https://www.google.com/maps/place/1103+E+2nd+St,+Tucson,+AZ+85719/@32.2343702,-110.9569788,17z/data=!3m1!4b1!4m6!3m5!1s0x86d67106f7e51223:0x6b78f9e48ae1775c!8m2!3d32.2343702!4d-110.9544039!16s%2Fg%2F11cslx4d03?entry=tts">1103 E. 2nd St.</a>, Rm. 409</b> (Harvill Building)</p>
   <p>P.O. Box 210076</p>
   <p>Tucson, Arizona 85721</p>
-  <p><a href="https://ischool.arizona.edu/contact">Contact Us </a>| <a href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | <a href="tel:5206213565">520-621-3565</a>
+  <p><a  style="color: #001C48;" href="https://ischool.arizona.edu/contact">Contact Us </a>| <a style="color: #001C48;" href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | <a  style="color: #001C48;" href="tel:5206213565">520-621-3565</a>
   </p>
-  <p>A member of <a href="https://www.ischools.org/">the iSchools consortium</a></p>
-  <p><a href="https://cirt.arizona.edu/?_gl=1*1j3b4h*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMTk4LjQ0LjAuMA..">Emergency Information</a></p>
-  <p><a href="https://cirt.arizona.edu/ualert/ualert-services?_gl=1%2A1amjf2h%2A_ga%2AMTEzNzM0NDcwNi4xNzA2MDUwMTEy%2A_ga_7PV3540XS3%2AMTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI2LjE2LjAuMA..">UAlert</a></p>
-  <p><a href="https://www.arizona.edu/information-security-privacy?_gl=1*1spajli*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI4LjE0LjAuMA..">Information Security & Privacy</a></p>
-  <p><a href="https://www.arizona.edu/campus-accessibility?_gl=1*hjhbgs*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjU1LjYwLjAuMA..">Campus Accessibility</a></p>      
+  <p>A member of <a  style="color: #001C48;" href="https://www.ischools.org/">the iSchools consortium</a></p>
+  <p><a  style="color: #001C48;" href="https://cirt.arizona.edu/?_gl=1*1j3b4h*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMTk4LjQ0LjAuMA..">Emergency Information</a></p>
+  <p><a  style="color: #001C48;" href="https://cirt.arizona.edu/ualert/ualert-services?_gl=1%2A1amjf2h%2A_ga%2AMTEzNzM0NDcwNi4xNzA2MDUwMTEy%2A_ga_7PV3540XS3%2AMTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI2LjE2LjAuMA..">UAlert</a></p>
+  <p><a  style="color: #001C48;" href="https://www.arizona.edu/information-security-privacy?_gl=1*1spajli*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI4LjE0LjAuMA..">Information Security & Privacy</a></p>
+  <p><a  style="color: #001C48;"href="https://www.arizona.edu/campus-accessibility?_gl=1*hjhbgs*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjU1LjYwLjAuMA..">Campus Accessibility</a></p>      
 </div>
 </div>
 
