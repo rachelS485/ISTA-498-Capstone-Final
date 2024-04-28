@@ -37,20 +37,6 @@
       margin-bottom: 10px;
     }
 
-    .help-link {
-      position: relative;   
-      top: 3px;
-      right: 10px;
-      font-size: 12px;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 5px;
-
-      white-space: nowrap; 
-
-    }
         #top {
             top: 0px;
             position: absolute;
@@ -178,19 +164,7 @@
             text-decoration: none;
             border-radius: 5px;
         }
-        .settings-icon{
-            position: relative;   
-            top: -7px;         
-            right: -1450px;       
-            z-index: 999;      
-            transform: translateY(-50%);
-            font-size: 18px;
-            color: white;
-            cursor: pointer;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 50%;   
-        }
+
         .square_page{
             background-color: #001C48;
             border-radius: 5px;
@@ -227,10 +201,24 @@
     }
 
 
+    .settings-icon{
+      position: absolute;   
+      top: 30px;         
+      right: 35px;       
+      z-index: 999;      
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 50%;   
+    }
+
     .help-link {
-      position: relative;   
-      top: -30px;
-      right: -1330px;
+      position: absolute;   
+      top: 15px;
+      right: 60px;
       font-size: 12px;
       color: white;
       cursor: pointer;
@@ -243,6 +231,8 @@
     }
 
 
+
+
     </style>
 
 </head>
@@ -252,7 +242,7 @@
     <div id="top" >
         <img id="nameLogo" src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona">
         <img id="logoTop" src="SchoolOfInformation.png" alt="School of Information">
-        <div >
+        <div>
             <button class="square_page2" id="logout" style="color: #dfdee7;">Logout</button>
             <a href="settings.html" class="fas fa-cog settings-icon"></a>
             <a href="instructions.html" class="help-link">Need help?</a>
@@ -413,17 +403,16 @@
     <div id="bottom">
         <img id="logoBottom" src="SchoolOfInformation.png" alt="School of Information">
         <div class="text-bar">
-            <p><b>School of Information</b></p>
-              <p><b><a style="text-decoration: none;" href="https://www.google.com/maps/place/1103+E+2nd+St,+Tucson,+AZ+85719/@32.2343702,-110.9569788,17z/data=!3m1!4b1!4m6!3m5!1s0x86d67106f7e51223:0x6b78f9e48ae1775c!8m2!3d32.2343702!4d-110.9544039!16s%2Fg%2F11cslx4d03?entry=tts">1103 E. 2nd St.</a>, Rm. 409</b> (Harvill Building)</p>
-              <p>P.O. Box 210076</p>
-              <p>Tucson, Arizona 85721</p>
-              <p><a href="https://ischool.arizona.edu/contact">Contact Us </a>| <a  style="color: #001C48;" href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | <a  style="color: #001C48;" href="tel:5206213565">520-621-3565</a>
-            </p>
-              <p>A member of <a href="https://www.ischools.org/">the iSchools consortium</a></p>
-            <p><a  href="https://cirt.arizona.edu/?_gl=1*1j3b4h*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMTk4LjQ0LjAuMA..">Emergency Information</a></p>
-            <p><a href="https://cirt.arizona.edu/ualert/ualert-services?_gl=1%2A1amjf2h%2A_ga%2AMTEzNzM0NDcwNi4xNzA2MDUwMTEy%2A_ga_7PV3540XS3%2AMTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI2LjE2LjAuMA..">UAlert</a></p>
-            <p><a href="https://www.arizona.edu/information-security-privacy?_gl=1*1spajli*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI4LjE0LjAuMA..">Information Security & Privacy</a></p>
-            <p><a href="https://www.arizona.edu/campus-accessibility?_gl=1*hjhbgs*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjU1LjYwLjAuMA..">Campus Accessibility</a></p>      
+            <p style="color: #001C48;" ><b>School of Information</b></p>
+            <p style="color: #001C48;"  ><b><a style="color: #001C48;"   href="https://www.google.com/maps/place/1103+E+2nd+St,+Tucson,+AZ+85719/@32.2343702,-110.9569788,17z/data=!3m1!4b1!4m6!3m5!1s0x86d67106f7e51223:0x6b78f9e48ae1775c!8m2!3d32.2343702!4d-110.9544039!16s%2Fg%2F11cslx4d03?entry=tts">1103 E. 2nd St.</a>, Rm. 409</b> (Harvill Building)</p>
+            <p style="color: #001C48;"  >P.O. Box 210076</p>
+            <p style="color: #001C48;" >Tucson, Arizona 85721</p>
+            <p style="color: #001C48;"  ><a style="color: #001C48;"  href="https://ischool.arizona.edu/contact">Contact Us </a>| <a  style="color: #001C48;" href="mailto:si_info@arizona.edu">si_info@arizona.edu</a> | <a  style="color: #001C48;" href="tel:5206213565">520-621-3565</a></p>
+            <p style="color: #001C48;"  >A member of <a  style="color: #001C48;" href="https://www.ischools.org/">the iSchools consortium</a></p>
+          <p style="color: #001C48;"  ><a style="color: #001C48;"  href="https://cirt.arizona.edu/?_gl=1*1j3b4h*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMTk4LjQ0LjAuMA..">Emergency Information</a></p>
+          <p style="color: #001C48;"  ><a style="color: #001C48;"  href="https://cirt.arizona.edu/ualert/ualert-services?_gl=1%2A1amjf2h%2A_ga%2AMTEzNzM0NDcwNi4xNzA2MDUwMTEy%2A_ga_7PV3540XS3%2AMTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI2LjE2LjAuMA..">UAlert</a></p>
+          <p style="color: #001C48;" ><a style="color: #001C48;"  href="https://www.arizona.edu/information-security-privacy?_gl=1*1spajli*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjI4LjE0LjAuMA..">Information Security & Privacy</a></p>
+          <p style="color: #001C48;" ><a style="color: #001C48;"  href="https://www.arizona.edu/campus-accessibility?_gl=1*hjhbgs*_ga*MTEzNzM0NDcwNi4xNzA2MDUwMTEy*_ga_7PV3540XS3*MTcxMzk4OTA2Mi4xNDYuMS4xNzEzOTkwMjU1LjYwLjAuMA..">Campus Accessibility</a></p>      
           </div>
     </div>
 

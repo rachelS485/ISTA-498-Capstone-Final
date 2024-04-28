@@ -153,34 +153,6 @@ a {
       border-radius: 5px;
     }
 
-    .settings-icon{
-      position: relative;   
-      top: -10px;         
-      left: 1450px;       
-      z-index: 999;      
-      transform: translateY(-50%);
-      font-size: 18px;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 50%;   
-    }
-
-.help-link {
-      position: relative;   
-      top: -32px;
-      left: 1340px;       
-      font-size: 12px;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 5px;
-
-      white-space: nowrap; 
-
-    }
 
 a:visited {
       color: inherit; 
@@ -193,6 +165,38 @@ a:visited {
 
 
 
+    .settings-icon{
+      position: absolute;   
+      top: 27px;         
+      right: 20px;       
+      z-index: 999;      
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 50%;   
+    }
+
+    .help-link {
+      position: absolute;   
+      top: 10px;
+      right: 50px;
+      font-size: 12px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+
+      white-space: nowrap; 
+
+    }
+
+
+
+
 
 </style>
 </head>
@@ -201,9 +205,9 @@ a:visited {
 <div id="top" style="background-color: #8B0015; color: white; width: 100%; height: 50px;">
 <img src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona" style="width: 300px; height: 35px; position: relative; left: 50px; top: 8px;">
 <div >
-  <button class="square_page2" id="logoutCourseRec" style="color: #dfdee7;">Logout</button>
-  <a href="settings.html" class="fas fa-cog settings-icon"></a>
-  <a href="instructions.html"  class="help-link">Need help?</a>
+  <button class="square_page2" id="logoutCourseRec" style="color: white;">Logout</button>
+  <a href="settings.html" style="color: white;" class="fas fa-cog settings-icon"></a>
+  <a href="instructions.html" class="help-link">Need help?</a>
 </div>
 </div>
 
@@ -222,15 +226,15 @@ Course Recommendation
 
 <div class="container">
 <div class="column" id="arts">
-  <h2>Emphasis</h2>
+  <h2 style="color: #0C234B;">Emphasis</h2>
   <ul id="divToChange1" class="scrollable-list"></ul>
 </div>
 <div class="column" id="society">
-  <h2>Arts</h2>
+  <h2 style="color: #0C234B;" >Arts</h2>
   <ul id="divToChange2" class="scrollable-list"></ul>
 </div>
 <div class="column" id="emphasis">
-  <h2>Society</h2>
+  <h2 style="color: #0C234B;">Society</h2>
   <ul id="divToChange3" class="scrollable-list"></ul>
 </div>
 </div>
