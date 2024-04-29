@@ -42,7 +42,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie:{
-        expires: 6000000000
+        expires: 60000000000
     }
 }));
 app.locals.login = false;
@@ -527,7 +527,7 @@ function sendEmailReminders(){
 
 //Automatic Emails
 
-const task = cron.schedule("*0 0 0,4 1,15 * ? *", ()=> {
+const task = cron.schedule("0 0 1 * *", ()=> {
     console.log("In CRON expression");
     sendEmailReminders();
     console.log("Executing...");

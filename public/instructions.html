@@ -244,7 +244,7 @@
         <img id="nameLogo" src="ua_wordmark_line_logo_white_rgb.min.svg" alt="University of Arizona">
         <img id="logoTop" src="SchoolOfInformation.png" alt="School of Information">
         <div>
-            <button class="square_page2" id="logout" style="color: #dfdee7;">Logout</button>
+            <button class="square_page2" id="logoutInstructions" style="color: #dfdee7;">Logout</button>
             <a href="settings.html" class="fas fa-cog settings-icon"></a>
             <a href="instructions.html" class="help-link">Need help?</a>
           </div>
@@ -257,8 +257,9 @@
     <div class="top_title">
         <a class="square_page" style="margin-right: 1145px; color: #dfdee7;" href="mainweb.html"> Main Page </a>  
         <a class="square_page" style="margin-right: 1060px; color: #dfdee7;" href="fouryearplan.html"> Four Year Plan </a>  
-        <a class="square_page" style="margin-right: 973px; color: #dfdee7;" href="interestsurvey.html"> Interest Survey </a>  
-        <a class="square_page" style="margin-right: 884px; color: #dfdee7;" href="resourcelinks.html"> Resource Links </a>  
+        <a class="square_page" style="margin-right: 973px; color: #dfdee7;" href="interestsurvey.html"> Interest Survey </a> 
+        <a class="square_page" style="margin-right: 845px; color: #dfdee7;" href="courserecomendation.html"> Course Recomendation  </a>  
+        <a class="square_page" style="margin-right: 755px; color: #dfdee7;" href="resourcelinks.html"> Resource Links </a>
     </div>
 
 
@@ -419,5 +420,27 @@
     
 
 </body>
+<script>
+    document.getElementById("logoutInstructions").onclick = function logoutUser(){
+        //Sending login info to server
+        let payload = {logout: "Logging out user"};
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/logout');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        console.log(payload);
+        console.log("Sending from Client");
+        xhr.send(JSON.stringify(payload));
+        xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log("Loggout User");
+            var response = JSON.parse(xhr.responseText);
+            console.log(response["test"]);
+            console.log("Worked!");
+            window.location.replace("login.html");
+        };
+        };
+      };
+    
+    </script>
 
 </html>
